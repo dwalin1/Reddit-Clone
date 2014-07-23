@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140702235025) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: true do |t|
     t.text     "content",           null: false
     t.integer  "submitter_id",      null: false
@@ -22,9 +25,9 @@ ActiveRecord::Schema.define(version: 20140702235025) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["parent_comment_id"], name: "index_comments_on_parent_comment_id"
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
-  add_index "comments", ["submitter_id"], name: "index_comments_on_submitter_id"
+  add_index "comments", ["parent_comment_id"], name: "index_comments_on_parent_comment_id", using: :btree
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["submitter_id"], name: "index_comments_on_submitter_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "title",        null: false
@@ -36,8 +39,8 @@ ActiveRecord::Schema.define(version: 20140702235025) do
     t.datetime "updated_at"
   end
 
-  add_index "posts", ["sub_id"], name: "index_posts_on_sub_id"
-  add_index "posts", ["submitter_id"], name: "index_posts_on_submitter_id"
+  add_index "posts", ["sub_id"], name: "index_posts_on_sub_id", using: :btree
+  add_index "posts", ["submitter_id"], name: "index_posts_on_submitter_id", using: :btree
 
   create_table "subs", force: true do |t|
     t.string   "title",        null: false
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 20140702235025) do
     t.datetime "updated_at"
   end
 
-  add_index "subs", ["moderator_id"], name: "index_subs_on_moderator_id"
-  add_index "subs", ["title"], name: "index_subs_on_title"
+  add_index "subs", ["moderator_id"], name: "index_subs_on_moderator_id", using: :btree
+  add_index "subs", ["title"], name: "index_subs_on_title", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",        null: false
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 20140702235025) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["session_token"], name: "index_users_on_session_token"
-  add_index "users", ["username"], name: "index_users_on_username"
+  add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end
