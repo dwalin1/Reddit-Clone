@@ -1,8 +1,7 @@
-class PostsController < ApplicationController
+class Api::PostsController < ApplicationController
   before_action :must_be_poster, only: [:edit, :update, :destroy]
   
   def index
-    redirect_to sub_url(params[:sub_id])
   end
   
   def new
@@ -46,6 +45,7 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
+    render json: @post
   end
   
   private

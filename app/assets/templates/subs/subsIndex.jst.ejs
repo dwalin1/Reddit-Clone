@@ -1,3 +1,10 @@
+<ul>
 <% subs.each(function(sub) { %>
-	<%= sub.escape("title") %>
+	<li>
+		<a href='#subs/<%= sub.get("id") %>'>
+			<%= sub.escape("title") %>
+		</a>
+	</li>
 <% }) %>
+
+</ul>

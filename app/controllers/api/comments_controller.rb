@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Api::CommentsController < ApplicationController
   before_action :must_be_commenter, only: [:destroy, :update, :edit]
   
   def new
