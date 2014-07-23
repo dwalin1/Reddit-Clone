@@ -13,3 +13,47 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+
+#notice {
+	background: green;
+	border-radius: 10px;
+	color: white;
+	padding: 5px;
+}
+
+#errors {
+	background: red;
+	border-radius: 10px;
+	color: white;
+	padding: 5px;
+}
+
+.post {
+	border-color: orange;
+	border-width: 1px;
+	border-style: dashed;
+	padding: 5px;	
+}
+
+.title {
+	display: inline-block;
+	padding: 5px;
+}
+
+.author {
+	display: inline-block;
+	padding: 5px;
+	float: right;
+	font-style: italic;	
+}
+
+.url {
+	display: inline-block;
+	padding: 5px;	
+}
+
+.content {
+	padding: 5px;
+}

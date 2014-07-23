@@ -1,0 +1,26 @@
+<h1><%= button_text %></h1>
+<form action="<%= form_action %>" method="post">
+	<input type="hidden" name="authenticity_token" 
+	value="<%= form_authenticity_token %>">
+	
+	<% if edit %>
+		<input type="hidden" name="_method" value="PATCH">
+	<% end %>
+	
+	<label>Title
+		<input type="text" name="post[title]" 
+		value="<%= post.title %>">
+	</label>
+	
+	<label>URL (optional)
+		<input type="text" name="post[url]" 
+		value="<%= post.url %>">
+	</label>
+	
+	<label>Content (optional)
+		<input type="text" name="post[content]" 
+		value="<%= post.content %>">
+	</label>
+	
+	<input type="submit" value="<%= button_text %>">
+</form>
