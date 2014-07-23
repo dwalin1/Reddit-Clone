@@ -6,7 +6,7 @@ App.Models.Sub = Backbone.Model.extend({
 		new App.Collections.Posts([], { sub: this });
 		return this._posts;
 	},
-	
+
 	parse: function(response) {
 		if (response.posts) {
 			this.posts().set(response.posts, { parse: true });

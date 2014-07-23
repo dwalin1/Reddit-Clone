@@ -1,14 +1,24 @@
 <h1><%= sub.escape("title") %></h1>
 <p><%= sub.escape("description") %> |
-<u>Moderator ID</u>: 
-<%= sub.escape("moderator_id") %> |
+<u>Moderator</u>: 
+<%= sub.escape("moderator") %> |
 </p>
 <br>
 <% sub.posts().each(function(post) { %>
 <div class="post">
 	<div class="title">	
-		<a href="#posts/<%= post.get("id") %>">
+		<a href="<%= post.escape('url') %>">
 			<%= post.escape("title") %>
+		</a>
+	</div>
+	
+	<div class="author">
+		<%= post.get("submitter") %>
+	</div>
+	
+	<div class="commentsLink">
+		<a href="#posts/<%= post.get("id") %>">
+			Some number of comments
 		</a>
 	</div>
 </div>
