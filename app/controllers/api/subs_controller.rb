@@ -1,4 +1,4 @@
-class SubsController < ApplicationController
+class Api::SubsController < ApplicationController
   before_action :must_be_moderator, only: [:edit, :update, :destroy]
   
   def index
