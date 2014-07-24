@@ -8,7 +8,6 @@ class Api::SubsController < ApplicationController
   
   def show
     @sub = Sub.includes(posts: [:submitter], moderator: [:username, :id]).find(params[:id])
-    @current_user = current_user
   end
   
   def new

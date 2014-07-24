@@ -42,7 +42,6 @@ class Api::PostsController < ApplicationController
   
   def show
     @post = Post.includes(:submitter, :comments => [:submitter]).find(params[:id])
-    @current_user = current_user
   end
   
   private

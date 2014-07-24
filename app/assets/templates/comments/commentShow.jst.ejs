@@ -1,0 +1,23 @@
+<li>
+	<div class="comment">
+		<div class="title">
+			<%= comment.escape("content") %>
+		</div>
+		
+		<div class="author">
+			<span class="authorname">
+				<%= comment.escape("submitter") %>
+			</span>
+			<br>
+<% if (user_id === comment.get("submitter_id")) { %>
+		<a href="#comments/<%= comment.get('id')%>/edit" 
+			class="btn btn-warning">
+			Edit
+		</a>
+		<button class="deleteComment btn btn-danger">
+			Delete
+		</button>
+<% } %>
+		</div>
+	</div>		
+</li>

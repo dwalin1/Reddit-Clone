@@ -9,9 +9,9 @@ Rails.application.routes.draw do
     end
   
     resources :posts, only: [:destroy, :update, :edit, :show] do
-      resources :comments, only: [:new]
+      resources :comments, only: [:index]
     end
   
-    resources :comments, except: [:new, :index]
+    resources :comments, except: [:index]
   end
 end

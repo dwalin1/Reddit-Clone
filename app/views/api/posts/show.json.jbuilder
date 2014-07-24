@@ -8,13 +8,6 @@ if @post.url == ""
 else
   json.url @post.url
 end
-  
-
-if @current_user
-  json.user_id @current_user.id
-else
-  json.user_id nil
-end
 
 json.comments @post.comments do |comment|
   json.submitter comment.submitter.username

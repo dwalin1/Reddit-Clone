@@ -1,14 +1,14 @@
-App.Views.postShow = Backbone.View.extend({
+App.Views.postShow = Backbone.CompositeView.extend({
 	template: JST["posts/postShow"],
 	
 	initialize: function() {
 		this.listenTo(this.model, "sync", this.render);
 		this.listenTo(this.model.comments(), "add remove", this.render);
+		console.log(user_id);
 	},
 	
 	events: {
 		"click button.deletePost": "deletePost",
-		"click button.deleteComment": "deleteComment",
 		"submit form.commentForm": "postComment"
 	},
 	
@@ -17,6 +17,17 @@ App.Views.postShow = Backbone.View.extend({
 			post: this.model
 		});
 		this.$el.html(renderedContent);
+		
+		var view = this;
+		var $commentEl = $("ul.comments");
+		
+		this.model.comments().each(function(comment) {
+			var commentShow = new App.Views.commentShow({
+				model: comment
+			});
+			view.addSubview($commentEl, commentShow);	
+		});
+				
 		return this;
 	},
 	
@@ -43,12 +54,5 @@ App.Views.postShow = Backbone.View.extend({
 				console.log("Error!");
 			}
 		})
-	},
-	
-	deleteComment: function(event) {
-		event.preventDefault();
-		var comment_id = $(event.target).data("id");
-		var comment = this.model.comments().get(comment_id);
-		comment.destroy();
 	}
 });
