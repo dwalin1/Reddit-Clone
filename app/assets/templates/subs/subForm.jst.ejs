@@ -1,0 +1,14 @@
+<h1><%= formText %></h1>
+<form id="subForm">
+	<label>Title
+		<input type="text" name="sub[title]" 
+		value="<%= sub.escape("title") %>">
+	</label>
+	
+	<label>Description
+		<input type="text" name="sub[description]" 
+		value="<%= sub.escape("description") %>">
+	</label>
+	
+	<input type="submit" value="<%= formText %>">
+</form>

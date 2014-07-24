@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   
   def must_be_logged_in
     unless current_user
-      redirect_to new_session_url, error: "You must be logged in for that."
+      render json: {msg: "You must be logged in for that."}, status: 401
     end
   end
 end

@@ -1,4 +1,5 @@
 class Api::PostsController < ApplicationController
+  before_action :must_be_logged_in, except: [:index, :show]
   before_action :must_be_poster, only: [:edit, :update, :destroy]
   
   def index

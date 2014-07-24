@@ -1,4 +1,5 @@
 class Api::SubsController < ApplicationController
+  before_action :must_be_logged_in, except: [:index, :show]
   before_action :must_be_moderator, only: [:edit, :update, :destroy]
   
   def index
@@ -7,6 +8,7 @@ class Api::SubsController < ApplicationController
   
   def show
     @sub = Sub.includes(posts: [:submitter], moderator: [:username, :id]).find(params[:id])
+    @current_user = current_user
   end
   
   def new
@@ -20,35 +22,32 @@ class Api::SubsController < ApplicationController
   def create
     @sub = current_user.owned_subs.new(sub_params)
     if @sub.save
-      redirect_to sub_url(@sub), notice: "Sub created!"
+      render json: @sub
     else
-      flash.now[:errors] = @sub.errors.full_messages
-      @sub = Sub.new
-      render 'new'
+      render json: @sub.errors.full_messages, status: :unprocessable_entity
     end
   end
   
   def update
     @sub = Sub.find(params[:id])
     if @sub.update_attributes(sub_params)
-      redirect_to sub_url(@sub), notice: "Sub updated!"
+      render json: @sub
     else
-      flash.now[:errors] = @sub.errors.full_messages
-      render 'edit'
+      render json: @sub.errors.full_messages, status: :unprocessable_entity
     end
   end
   
   def destroy
     @sub = Sub.find(params[:id])
     @sub.destroy
-    redirect_to subs_url, notice: "Sub destroyed!"
+    render json: {}
   end
   
   private
   def must_be_moderator
     sub = Sub.find(params[:id])
     unless current_user == sub.moderator
-      redirect_to subs_url, errors: "You aren't the moderator of that sub."
+      render json: {msg: "You aren't the moderator of this sub."}, status: 401
     end 
   end
   

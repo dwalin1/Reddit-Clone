@@ -1,4 +1,5 @@
 class Api::CommentsController < ApplicationController
+  before_action :must_be_logged_in, except: [:index, :show]
   before_action :must_be_commenter, only: [:destroy, :update, :edit]
   
   def new

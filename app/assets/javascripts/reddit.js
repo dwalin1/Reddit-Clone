@@ -5,7 +5,7 @@ window.App = {
 	Views: {},
 	
 	initialize: function() {
-		new App.Routers.AppRouter({
+		App.router = new App.Routers.AppRouter({
 			$rootEl: $("#content")
 		});
 		Backbone.history.start();

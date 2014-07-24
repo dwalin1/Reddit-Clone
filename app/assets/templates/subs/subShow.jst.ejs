@@ -1,7 +1,11 @@
 <h1><%= sub.escape("title") %></h1>
 <p><%= sub.escape("description") %> |
 <u>Moderator</u>: 
-<%= sub.escape("moderator") %> |
+<%= sub.escape("moderator") %> | 
+<% if (sub.get("is_mod")) { %>
+	<a href="#subs/<%= sub.get('id') %>/edit">Edit Sub</a>
+	<button class="deleteSub">Delete Sub</button>
+<% } %>
 </p>
 <br>
 <% sub.posts().each(function(post) { %>
