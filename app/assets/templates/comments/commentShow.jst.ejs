@@ -10,10 +10,9 @@
 			</span>
 			<br>
 <% if (user_id === comment.get("submitter_id")) { %>
-		<a href="#comments/<%= comment.get('id')%>/edit" 
-			class="btn btn-warning">
+		<button class="editComment btn btn-warning">
 			Edit
-		</a>
+		</button>
 		<button class="deleteComment btn btn-danger">
 			Delete
 		</button>
