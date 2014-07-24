@@ -13,9 +13,12 @@
   <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
   	<ul class="nav navbar-nav">
 		<li>
-			<a href="">Subs</a>
+			<a href="#">Subs</a>
 		</li>
     <% if current_user %>
+		<li>
+			<a href="#subs/new">Create Sub</a>
+		</li>
 		<li>
 		<%= button_to "Sign out", session_url, method: :delete, class: "btn btn-primary navbar-btn" %>
 		</li>
@@ -27,4 +30,16 @@
   </div>
 </div>
 </nav>
+
+<!--The below uses flash, and therefore never disappears when the user is navigating with Backbone -->
+<!-- <% if flash[:errors] %>
+<div class="alert alert-warning alert-dismissible" role="alert">
+   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+<%= flash[:errors].join("<br>") %>
+</div>
+<% end %>
+
+<% if flash[:notice] %>
+	<div class="alert alert-success"><%= flash[:notice] %></div>
+<% end %> -->
 	

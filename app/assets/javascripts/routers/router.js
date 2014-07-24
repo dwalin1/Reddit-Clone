@@ -1,6 +1,7 @@
 App.Routers.AppRouter = Backbone.Router.extend({
 	routes: {
 		"": "subsIndex",
+		"subs/new": "subNew",
 		"subs/:id": "subShow",
 		"posts/:id": "postShow"
 	},
@@ -24,6 +25,11 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		});
 		this._swapView(view);
 	},
+	
+	// subNew: function() {
+	// 	var sub = new App.Views.subNew({
+	// 	});
+	// },
 	
 	postShow: function(id) {
 		var post = new App.Models.Post({
