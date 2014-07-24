@@ -52,7 +52,10 @@ body {
 	border-color: orange;
 	border-width: 1px;
 	border-style: dashed;
-	padding: 5px;	
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 18px;	
 }
 
 .title {
@@ -64,6 +67,9 @@ body {
 	display: inline-block;
 	padding: 5px;
 	float: right;
+}
+
+span.authorname {
 	font-style: italic;	
 }
 

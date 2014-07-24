@@ -19,21 +19,18 @@ class Api::PostsController < ApplicationController
     @post.sub_id = params[:sub_id]
     
     if @post.save
-      redirect_to sub_url(@post.sub), notice: "Post created!"
+      render json: @post
     else
-      flash.now[:errors] = @post.errors.full_messages
-      @post = Post.new
-      render 'new'
+      render json: @sub.errors.full_messages, status: :unprocessable_entity
     end
   end
   
   def update
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
-      redirect_to sub_url(@post.sub), notice: "Post updated!"
+      render json: @post
     else
-      flash.now[:errors] = @post.errors.full_messages
-      render 'edit'
+      render json: @sub.errors.full_messages, status: :unprocessable_entity
     end
   end
   
@@ -41,18 +38,19 @@ class Api::PostsController < ApplicationController
     @post = Post.find(params[:id])
     sub = @post.sub
     @post.destroy
-    redirect_to sub_url(sub), notice: "Post destroyed!"
+    render json: {}
   end
   
   def show
     @post = Post.includes(:submitter, :comments => [:submitter]).find(params[:id])
+    @current_user = current_user
   end
   
   private
   def must_be_poster
     post = Post.find(params[:id])
     unless current_user == post.submitter
-      redirect_to sub_url(post.sub), errors: "You aren't the submitter of that post."
+      render json: {msg: "You aren't the poster of this post."}, status: 401
     end 
   end
   

@@ -4,8 +4,9 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		"subs/new": "subForm",
 		"subs/:id/edit": "subForm",
 		"subs/:id": "subShow",
+		"posts/:sub/new": "postNew",
+		"posts/:id/edit": "postEdit",
 		"posts/:id": "postShow",
-		"unauthorized": "unauthorizedUser" 
 	},
 	
 	initialize: function(options) {
@@ -50,6 +51,26 @@ App.Routers.AppRouter = Backbone.Router.extend({
 			model: post
 		});
 		this._swapView(view);
+	},
+	
+	postForm: function(post) {
+		var view = new App.Views.postForm({
+			model: post
+		});
+		this._swapView(view);
+	},
+	
+	postNew: function(sub) {
+		var post = new App.Models.Post({
+			sub_id: sub
+		});
+		this.postForm(post);
+	},
+	
+	postEdit: function(id) {
+		var post = new App.Models.Post({id: id});
+		post.fetch();
+		this.postForm(post);
 	},
 	
 	_swapView: function(view) {

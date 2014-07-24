@@ -7,10 +7,10 @@ json.extract!(@sub, :title, :description, :moderator_id, :id)
 json.moderator @sub.moderator.username
 json.moderator_id @sub.moderator.id
 
-if @current_user && @sub.moderator_id == @current_user.id
-  json.is_mod true
+if @current_user
+  json.user_id @current_user.id
 else
-  json.is_mod false
+  json.user_id nil
 end
 
 json.posts @sub.posts do |post|

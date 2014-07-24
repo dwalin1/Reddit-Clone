@@ -1,0 +1,19 @@
+<h1><%= formText %></h1>
+<form id="postForm">
+	<label>Title
+		<input type="text" name="post[title]" 
+		value="<%= post.escape("title") %>">
+	</label>
+	
+	<label>URL
+		<input type="text" name="post[url]" 
+		value="<%= post.escape("url") %>">
+	</label>
+		
+	<label>Content
+		<input type="text" name="post[content]" 
+		value="<%= post.escape("content") %>">
+	</label>
+	
+	<input type="submit" value="<%= formText %>">
+</form>

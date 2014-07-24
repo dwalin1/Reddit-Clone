@@ -1,12 +1,24 @@
-<h1><%= sub.escape("title") %></h1>
-<p><%= sub.escape("description") %> |
-<u>Moderator</u>: 
-<%= sub.escape("moderator") %> | 
-<% if (sub.get("is_mod")) { %>
-	<a href="#subs/<%= sub.get('id') %>/edit">Edit Sub</a>
-	<button class="deleteSub">Delete Sub</button>
-<% } %>
-</p>
+<div>
+	
+	<% if (sub.get("user_id") === sub.get("moderator_id")) { %>
+		<div class="author">
+			<a href="#subs/<%= sub.get('id') %>/edit" 
+				class="btn btn-warning">
+				Edit Sub
+			</a>
+			<button class="deleteSub btn btn-danger">
+				Delete Sub
+			</button>
+		</div>
+	<% } %>
+	
+	<h1><%= sub.escape("title") %></h1>
+	
+	<%= sub.escape("description") %> |
+	<u>Moderator</u>: 
+	<%= sub.escape("moderator") %> 
+</div>
+
 <br>
 <% sub.posts().each(function(post) { %>
 <div class="post">
@@ -17,7 +29,13 @@
 	</div>
 	
 	<div class="author">
-		<%= post.escape("submitter") %>
+		<span class="authorname">
+			<%= post.escape("submitter") %>
+		</span>
+		<br>
+		<% if (sub.get("user_id") === post.get("submitter_id")) { %>
+			(That's you!)
+		<% } %>
 	</div>
 	
 	<div class="commentsLink">
