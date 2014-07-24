@@ -16,5 +16,11 @@ end
 json.posts @sub.posts do |post|
   json.submitter post.submitter.username
   json.submitter_id post.submitter.id
-  json.extract!(post, :title, :url, :id)
+  json.extract!(post, :title, :id)
+  
+  if post.url == ""
+    json.url "#posts/#{post.id}"
+  else
+    json.url post.url
+  end
 end
