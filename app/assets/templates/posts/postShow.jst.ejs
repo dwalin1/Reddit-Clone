@@ -26,6 +26,17 @@
 	</div>
 </div>
 
+<div class="top-level-comment">
+	<form class="commentForm">
+		<textarea 
+			placeholder="Comment here"
+			name="comment[content]">
+		</textarea>
+		
+		<input type="submit" value="Post">
+	</form>
+</div>
+
 <ul>
 <% post.comments().each(function(comment) { %>
 	<li>

@@ -8,16 +8,12 @@ class Api::CommentsController < ApplicationController
   end
   
   def create
-    @comment = current_user.comments.new(
-    content: params[:comment][:content],
-    post_id: params[:comment][:post_id]
-    )
+    @comment = current_user.comments.new(comment_params)
     
     if @comment.save
-      redirect_to post_url(@comment.post), notice: "Comment created!"
+      render json: @comment
     else
-      flash.now[:errors] = @comment.errors.full_messages
-      redirect_to post_url(params[:post_id])
+      render json: @comment.errors.full_messages, status: :unprocessable_entity
     end
   end
   
@@ -28,16 +24,19 @@ class Api::CommentsController < ApplicationController
   
   def destroy
     comment = Comment.find(params[:id])
-    post = comment.post
     comment.destroy
-    redirect_to post_url(post), notice: "Comment deleted!"
+    render json: {}
   end
   
   private
   def must_be_commenter
     comment = Comment.find(params[:id])
     unless current_user == comment.submitter
-      redirect_to post_url(comment.post), errors: "You aren't the submitter of that post."
+      render json: {msg: "You aren't the poster of this comment."}, status: 401
     end 
+  end
+  
+  def comment_params
+    params.require(:comment).permit(:content, :post_id, :parent_comment_id)
   end
 end
