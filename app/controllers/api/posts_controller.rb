@@ -44,8 +44,7 @@ class Api::PostsController < ApplicationController
   end
   
   def show
-    @post = Post.find(params[:id])
-    render json: @post
+    @post = Post.includes(:submitter, :comments => [:submitter]).find(params[:id])
   end
   
   private

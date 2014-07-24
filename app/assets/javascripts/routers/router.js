@@ -1,7 +1,8 @@
 App.Routers.AppRouter = Backbone.Router.extend({
 	routes: {
 		"": "subsIndex",
-		"subs/:id": "subShow"
+		"subs/:id": "subShow",
+		"posts/:id": "postShow"
 	},
 	
 	initialize: function(options) {
@@ -20,6 +21,17 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		var sub = App.subs.getOrFetch(id);
 		var view = new App.Views.subShow({
 			model: sub
+		});
+		this._swapView(view);
+	},
+	
+	postShow: function(id) {
+		var post = new App.Models.Post({
+			id: id	
+		});
+		post.fetch();
+		var view = new App.Views.postShow({
+			model: post
 		});
 		this._swapView(view);
 	},

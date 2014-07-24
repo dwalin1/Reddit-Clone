@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login!(@user)
-      redirect_to subs_url, notice: "User created!"
+      redirect_to root_url, notice: "User created!"
     else
       flash.now[:errors] = @user.errors.full_messages
       render 'new'

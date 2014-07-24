@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     
     if @user
       login!(@user)
-      redirect_to subs_url, notice: "Logged in!"
+      redirect_to root_url, notice: "Logged in!"
     else
       flash.now[:errors] = "Invalid username or password."
       @user = User.new

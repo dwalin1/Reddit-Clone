@@ -20,6 +20,11 @@ class Api::CommentsController < ApplicationController
     end
   end
   
+  def show
+    @comment = Comment.find(params[:id])
+    render json: @comment
+  end
+  
   def destroy
     comment = Comment.find(params[:id])
     post = comment.post

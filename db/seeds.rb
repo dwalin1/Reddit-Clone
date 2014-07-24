@@ -9,6 +9,11 @@
 # ActiveRecord::Base.transaction do
 # end
 
+
+#always use rake db:reset, which will erase the db before recreating it
+#if you run rake db:seed it will do this on top of what is already in the db, and it will take forever because the number of things increases exponentially
+
+#10 users, 10 subs
 10.times do
   ActiveRecord::Base.transaction do   
     u = User.create!(
@@ -24,6 +29,7 @@
   end
 end
 
+#100 posts
 User.all.each do |user|
   Sub.all.each do |sub|
     Post.create!(
@@ -32,6 +38,17 @@ User.all.each do |user|
       content: Faker::Lorem.sentence,
       sub_id: sub.id,
       submitter_id: user.id
+    )
+  end
+end
+
+#1000 comments
+User.all.each do |user|
+  Post.all.each do |post|
+    Comment.create!(
+      content: Faker::Lorem.sentence,
+      submitter_id: user.id,
+      post_id: post.id
     )
   end
 end

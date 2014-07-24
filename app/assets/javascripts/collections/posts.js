@@ -3,19 +3,5 @@ App.Collections.Posts = Backbone.Collection.extend({
 	
 	model: App.Models.Post,
 	
-	getOrFetch: function (id) {
-	  var collection = this;
-	  var model  = this.get(id);
-	  
-	  if (model) {
-	    model.fetch();
-	  } else {
-	    model = new App.Models.Post({ id: id });
-	    model.fetch({
-	      success: function () { collection.add(model); }
-	    });
-	  }
-
-	  return model;
-	}
+	//may not want a getOrFetch here, because we may not want to 		maintain a collection of all posts (that would be a shit ton)
 })
