@@ -38,7 +38,7 @@ class Api::CommentsController < ApplicationController
   end
   
   def show
-    @comment = Comment.includes(comments: [:submitter]).find(params[:id])
+    @comment = Comment.find(params[:id])
   end
   
   def destroy

@@ -35,6 +35,7 @@ App.Views.commentForm = Backbone.View.extend({
 		var that = this;
 		this.model.save(formData, {
 			success: function(model, response) {
+				model.set({ post: that.parent.model.get("post") });
 				that.parent.model.comments().add(model);
 				that.parent.removeSubview(that.el, that);
 				console.log("Success!");

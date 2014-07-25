@@ -5,10 +5,11 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	form: false,
 	
+	tagName: "li",
+	
 	initialize: function(options) {
 		this.parent = options.parent;		
 		this.listenTo(this.model, "sync", this.render);
-		// this.listenTo(this.model.comments(), "sync", this.render);
 		this.listenTo(this.model.comments(), "add", this.addComment);
 		
 		var view = this;
@@ -41,7 +42,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	},
 	
 	addComment: function(comment) {
-		//no comments on comments
+		comment.set({ post: this.model.get("post") });
 		this.addSubview(this.commentEl, new App.Views.commentShow({
 			model: comment,
 			parent: this
@@ -83,8 +84,10 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	showReplyForm: function(event) {
 		event.preventDefault();
 		event.stopPropagation();
+		var that = this;
 		var commentForm = new App.Views.commentForm({
-			model: new App.Models.Comment({ post: this.model.get("post") }),
+			//just for form, probably makes no sense to add ref to post here
+			model: new App.Models.Comment({post: that.model.get("post")}),
 			parent: this
 		});
 		this.addSubview("div.replyForm", commentForm);

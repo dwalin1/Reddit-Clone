@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   
     resources :comments, except: [:index]
     
-    get "nested_comments/:parent_id/", to: "comments#comment_index"
+    # get "nested_comments/:parent_id/", to: "comments#comment_index"
   end
 end

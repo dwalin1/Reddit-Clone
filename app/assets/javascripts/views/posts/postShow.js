@@ -4,12 +4,10 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	initialize: function() {
 		var view = this;
 		this.commentEl = "ul.post-comments";
-		
-		this.model.comments().each(this.addComment.bind(this));
+		this.model.top_level_comments().each(this.addComment.bind(this));
 		
 		this.listenTo(this.model, "sync", this.render);
-		// this.listenTo(this.model.comments(), "sync", this.render);
-		this.listenTo(this.model.comments(), "add", this.addComment);		
+		this.listenTo(this.model.top_level_comments(), "add", this.addComment);		
 	},
 	
 	events: {
@@ -27,6 +25,7 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	},
 	
 	addComment: function(comment) {
+		// comment.set({ post: this.model });
 		this.addSubview("ul.post-comments", new App.Views.commentShow({
 			model: comment,
 			parent: this
@@ -51,8 +50,9 @@ App.Views.postShow = Backbone.CompositeView.extend({
 		comment.save({}, {
 			success: function(model, response) {
 				console.log("Success!");
-				model.post = that.model;
-				that.model.comments().add(model);
+				model.set({ post: that.model });
+				model.set({ submitter: user })
+				that.model.top_level_comments().add(model);
 			},
 			
 			error: function(model, response) {

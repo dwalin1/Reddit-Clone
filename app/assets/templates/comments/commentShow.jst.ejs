@@ -1,31 +1,32 @@
-<li>
-	<div class="comment">
-		<div class="title">
+<div class="comment row">
+		<div class="col-xs-8 title">
 			<%= comment.escape("content") %>
 		</div>
 		
-		<div class="author">
+		<div class="col-xs-1 author">	
 			<span class="authorname">
 				<%= comment.escape("submitter") %>
 			</span>
-			<br>
-<% if (user_id === comment.get("submitter_id")) { %>
-	<button class="editComment btn btn-warning">
-		Edit
-	</button>
-	<button class="deleteComment btn btn-danger">
-		Delete
-	</button>
-<% } else { %>
-<% } %>
-	<button class="replyForm btn btn-info">
-		Reply
-	</button>
 		</div>
-	</div>
 	
-	<div class="replyForm"></div>
-		
-	<ul class="comments" data-parent-comment-id="<%= comment.id %>">
-	</ul>	
-</li>
+		<div class="buttons col-xs-3">
+			<% if (user_id === comment.get("submitter_id")) { %>
+			<button class="editComment btn btn-warning pull-right">
+				Edit
+			</button>
+			<button class="deleteComment btn btn-danger pull-right">
+				Delete
+			</button>
+			<% } else { %>
+			<% } %>
+			<button class="replyForm btn btn-info pull-right">
+				Reply
+			</button>
+		</div>
+</div>
+
+<div class="replyForm"></div>
+	
+<ul class="comments" data-parent-comment-id="<%= comment.id %>">
+</ul>	
+

@@ -9,7 +9,13 @@ else
   json.url @post.url
 end
 
-json.comments @post.comments do |comment|
+json.top_level_comments @post.comments.where(parent_comment_id: nil).each do |comment|
+  json.submitter comment.submitter.username
+  json.submitter_id comment.submitter.id
+  json.extract!(comment, :content, :id, :post_id, :parent_comment_id)
+end
+
+json.comments @post.comments.where.not(parent_comment_id: nil) do |comment|
   json.submitter comment.submitter.username
   json.submitter_id comment.submitter.id
   json.extract!(comment, :content, :id, :post_id, :parent_comment_id)

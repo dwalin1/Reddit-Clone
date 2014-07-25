@@ -1,8 +1,10 @@
 <script type="application/javascript">
 	<% if current_user %>
 		var user_id = <%= current_user.id %>;
+		var user = "<%= current_user.username %>";
 	<% else %>
 		var user_id = null;
+		var user = null;
 	<% end %>
 	$(App.initialize);
 </script>
