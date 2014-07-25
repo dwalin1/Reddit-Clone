@@ -26,6 +26,7 @@
 	</div>
 </div>
 
+<% if (user_id) { %>
 <div class="top-level-comment-form">
 	<form class="commentForm">
 		<textarea 
@@ -35,6 +36,9 @@
 		<input type="submit" value="Post">
 	</form>
 </div>
+<% } else { %>
+<h5>Log in to comment.</h5>
+<% } %>
 
 <ul class="comments">
 </ul>
