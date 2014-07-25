@@ -17,3 +17,8 @@
 
 #Ignore my personal schedule for building the app
 schedule.txt
+
+# Ignore application configuration
+/config/application.yml
+
+/config/secrets.yml

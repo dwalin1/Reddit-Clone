@@ -31,9 +31,3 @@ test: &TEST
   database: reddit_test
   host: localhost
   username: Meredan
-
-production:
-  adapter: postgresql
-  database: reddit_production
-  host: localhost
-  username: Meredan

@@ -38,6 +38,8 @@ gem 'debugger', group: [:development, :test]
 
 gem 'bootstrap-sass'
 
+gem "figaro"
+
 group :development do
   gem 'pry-rails'
   gem 'annotate'
