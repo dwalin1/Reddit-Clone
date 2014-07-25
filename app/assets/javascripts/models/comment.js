@@ -3,7 +3,10 @@ App.Models.Comment = Backbone.Model.extend({
 	
 	comments: function() {
 		this._comments = this._comments ||
-		new App.Collections.Comments([], { parent_comment: this });
+		new App.Collections.Comments(this.post.comments().where({
+			parent_comment_id: this.id
+		}), 
+			{ parent_comment: this });
 		return this._comments;
 	},
 
@@ -14,5 +17,9 @@ App.Models.Comment = Backbone.Model.extend({
 		}
 		
 		return response
+	},
+	
+	initialize: function(options) {
+		this.post = options.post;
 	}
 });

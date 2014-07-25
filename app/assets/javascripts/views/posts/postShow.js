@@ -51,6 +51,7 @@ App.Views.postShow = Backbone.CompositeView.extend({
 		comment.save({}, {
 			success: function(model, response) {
 				console.log("Success!");
+				model.post = that.model;
 				that.model.comments().add(model);
 			},
 			

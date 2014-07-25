@@ -6,9 +6,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	form: false,
 	
 	initialize: function(options) {
-		this.parent = options.parent;
-		this.model.comments().fetch();
-		
+		this.parent = options.parent;		
 		this.listenTo(this.model, "sync", this.render);
 		// this.listenTo(this.model.comments(), "sync", this.render);
 		this.listenTo(this.model.comments(), "add", this.addComment);
@@ -86,7 +84,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		event.preventDefault();
 		event.stopPropagation();
 		var commentForm = new App.Views.commentForm({
-			model: new App.Models.Comment(),
+			model: new App.Models.Comment({ post: this.model.get("post") }),
 			parent: this
 		});
 		this.addSubview("div.replyForm", commentForm);
