@@ -8,21 +8,15 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	tagName: "li",
 	
 	initialize: function(options) {
-		this.parent = options.parent;		
+		this.parent = options.parent;	
+			
 		this.listenTo(this.model, "sync", this.render);
 		this.listenTo(this.model.comments(), "add", this.addComment);
+			
+		this.commentEl = "ul.comments[data-parent-comment-id='" + this.model.id + "']";
+		console.log(this.commentEl);
 		
-		var view = this;
-		
-		this.commentEl = "ul.comments[data-parent-comment-id=" + this.model.id + "]";
-		
-		this.model.comments().each(function(comment) {
-			var commentShow = new App.Views.commentShow({
-				model: comment,
-				parent: view.parent
-			});
-			view.addSubview(view.commentEl, commentShow);	
-		});
+		this.model.comments().each(this.addComment.bind(this));	
 	},
 	
 	events: {
@@ -37,12 +31,14 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		var renderedContent = template({
 			comment: this.model,
 		});
-		this.$el.html(renderedContent);		
+		this.$el.html(renderedContent);	
+		this.attachSubviews();	
 		return this;
 	},
 	
 	addComment: function(comment) {
-		comment.set({ post: this.model.get("post") });
+		// comment.set({ post: this.model.get("post") });
+		console.log(comment);
 		this.addSubview(this.commentEl, new App.Views.commentShow({
 			model: comment,
 			parent: this
