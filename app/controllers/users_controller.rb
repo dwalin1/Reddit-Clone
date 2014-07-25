@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   
   def must_be_same_user
     unless current_user.id == params[:id]
-      flash.now[:errors] = "You can't update another user, silly!"
+      flash.now[:errors] = ["You can't update another user, silly!"]
       render 'edit'
     end
   end
