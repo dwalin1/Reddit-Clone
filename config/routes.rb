@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: { format: :json } do
     resources :subs do
-      resources :posts, except: [:destroy, :update, :edit, :show]
+      resources :posts, only: [:index]
     end
   
-    resources :posts, only: [:destroy, :update, :edit, :show] do
+    resources :posts, except: [:index] do
       resources :comments, only: [:index]
     end
   

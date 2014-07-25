@@ -12,5 +12,5 @@ end
 json.comments @post.comments do |comment|
   json.submitter comment.submitter.username
   json.submitter_id comment.submitter.id
-  json.extract!(comment, :content, :id)
+  json.extract!(comment, :content, :id, :post_id)
 end

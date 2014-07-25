@@ -10,13 +10,22 @@
 			</span>
 			<br>
 <% if (user_id === comment.get("submitter_id")) { %>
-		<button class="editComment btn btn-warning">
-			Edit
-		</button>
-		<button class="deleteComment btn btn-danger">
-			Delete
-		</button>
+	<button class="editComment btn btn-warning">
+		Edit
+	</button>
+	<button class="deleteComment btn btn-danger">
+		Delete
+	</button>
+<% } else { %>
+	<button class="replyForm btn btn-info">
+		Reply
+	</button>
 <% } %>
 		</div>
-	</div>		
+	</div>
+	
+	<div class="replyForm"></div>
+		
+	<ul class="comments">
+	</ul>	
 </li>

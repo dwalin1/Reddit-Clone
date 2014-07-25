@@ -4,7 +4,6 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	initialize: function() {
 		this.listenTo(this.model, "sync", this.render);
 		this.listenTo(this.model.comments(), "add remove", this.render);
-		console.log(user_id);
 	},
 	
 	events: {
@@ -40,6 +39,7 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	
 	postComment: function(event) {
 		event.preventDefault();
+		event.stopPropagation();
 		var formData = $(event.target).serializeJSON();
 		formData.comment.post_id = this.model.get("id");
 		var comment = new App.Models.Comment(formData);

@@ -1,5 +1,5 @@
 <div>	
-	<% if (sub.get("user_id") === sub.get("moderator_id")) { %>
+	<% if (user_id === sub.get("moderator_id")) { %>
 		<div class="author">
 			<a href="#subs/<%= sub.get('id') %>/edit" 
 				class="btn btn-warning">
@@ -16,6 +16,9 @@
 	<%= sub.escape("description") %> |
 	<u>Moderator</u>: 
 	<%= sub.escape("moderator") %> 
+</div>
+
+<div class="postPost">
 </div>
 
 <br>
