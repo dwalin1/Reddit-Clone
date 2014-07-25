@@ -23,7 +23,7 @@ class Api::SubsController < ApplicationController
     if @sub.save
       render json: @sub
     else
-      render json: @sub.errors.full_messages, status: :unprocessable_entity
+      render json: {msg: "Sub could not be created."}, status: 422
     end
   end
   
@@ -32,7 +32,7 @@ class Api::SubsController < ApplicationController
     if @sub.update_attributes(sub_params)
       render json: @sub
     else
-      render json: @sub.errors.full_messages, status: :unprocessable_entity
+      render json: {msg: "Sub could not be updated."}, status: 422
     end
   end
   

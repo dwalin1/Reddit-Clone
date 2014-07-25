@@ -22,7 +22,7 @@ App.Views.commentForm = Backbone.View.extend({
 	removeThis: function(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		this.remove();
+		this.parent.removeSubview(this.el, this);
 	},
 	
 	saveComment: function(event) {
@@ -36,7 +36,7 @@ App.Views.commentForm = Backbone.View.extend({
 		this.model.save(formData, {
 			success: function(model, response) {
 				that.parent.model.comments().add(model);
-				that.remove();
+				that.parent.removeSubview(that.el, that);
 				console.log("Success!");
 			},
 			error: function(model, response, thing3) {

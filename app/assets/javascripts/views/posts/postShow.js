@@ -2,8 +2,14 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	template: JST["posts/postShow"],
 	
 	initialize: function() {
+		var view = this;
+		this.commentEl = "ul.post-comments";
+		
+		this.model.comments().each(this.addComment.bind(this));
+		
 		this.listenTo(this.model, "sync", this.render);
-		this.listenTo(this.model.comments(), "add remove", this.render);
+		// this.listenTo(this.model.comments(), "sync", this.render);
+		this.listenTo(this.model.comments(), "add", this.addComment);		
 	},
 	
 	events: {
@@ -16,18 +22,15 @@ App.Views.postShow = Backbone.CompositeView.extend({
 			post: this.model
 		});
 		this.$el.html(renderedContent);
-		
-		var view = this;
-		var $commentEl = $("ul.comments");
-		
-		this.model.comments().each(function(comment) {
-			var commentShow = new App.Views.commentShow({
-				model: comment
-			});
-			view.addSubview($commentEl, commentShow);	
-		});
-				
+		this.attachSubviews();
 		return this;
+	},
+	
+	addComment: function(comment) {
+		this.addSubview("ul.post-comments", new App.Views.commentShow({
+			model: comment,
+			parent: this
+		}));
 	},
 	
 	deletePost: function(event) {
@@ -41,6 +44,7 @@ App.Views.postShow = Backbone.CompositeView.extend({
 		event.preventDefault();
 		event.stopPropagation();
 		var formData = $(event.target).serializeJSON();
+		$(event.target).children("textarea").val("");
 		formData.comment.post_id = this.model.get("id");
 		var comment = new App.Models.Comment(formData);
 		var that = this;

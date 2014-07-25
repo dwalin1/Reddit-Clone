@@ -5,9 +5,25 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	form: false,
 	
-	initialize: function() {
+	initialize: function(options) {
+		this.parent = options.parent;
+		this.model.comments().fetch();
+		
 		this.listenTo(this.model, "sync", this.render);
-		this.listenTo(this.model.comments(), "add remove", this.render);
+		// this.listenTo(this.model.comments(), "sync", this.render);
+		this.listenTo(this.model.comments(), "add", this.addComment);
+		
+		var view = this;
+		
+		this.commentEl = "ul.comments[data-parent-comment-id=" + this.model.id + "]";
+		
+		this.model.comments().each(function(comment) {
+			var commentShow = new App.Views.commentShow({
+				model: comment,
+				parent: view.parent
+			});
+			view.addSubview(view.commentEl, commentShow);	
+		});
 	},
 	
 	events: {
@@ -19,31 +35,26 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	render: function() {
 		template = this.form ? this.formTemplate : this.template;
-		
 		var renderedContent = template({
 			comment: this.model,
 		});
-		
-		this.$el.html(renderedContent);
-		
-		var view = this;
-		var $commentEl = $("ul.comments");
-		
-		this.model.comments().each(function(comment) {
-			var commentShow = new App.Views.commentShow({
-				model: comment
-			});
-			view.addSubview($commentEl, commentShow);	
-		});
-		
+		this.$el.html(renderedContent);		
 		return this;
+	},
+	
+	addComment: function(comment) {
+		//no comments on comments
+		this.addSubview(this.commentEl, new App.Views.commentShow({
+			model: comment,
+			parent: this
+		}));
 	},
 	
 	deleteComment: function(event) {
 		event.preventDefault();
 		event.stopPropagation();
 		this.model.destroy();
-		this.remove();
+		this.parent.removeSubview(this.el, this);
 	},
 	
 	editComment: function(event) {
@@ -78,6 +89,6 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 			model: new App.Models.Comment(),
 			parent: this
 		});
-		this.addSubview($("div.replyForm"), commentForm);
+		this.addSubview("div.replyForm", commentForm);
 	}
 })

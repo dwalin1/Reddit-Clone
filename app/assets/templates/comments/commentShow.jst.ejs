@@ -17,15 +17,15 @@
 		Delete
 	</button>
 <% } else { %>
+<% } %>
 	<button class="replyForm btn btn-info">
 		Reply
 	</button>
-<% } %>
 		</div>
 	</div>
 	
 	<div class="replyForm"></div>
 		
-	<ul class="comments">
+	<ul class="comments" data-parent-comment-id="<%= comment.id %>">
 	</ul>	
 </li>

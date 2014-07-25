@@ -2,6 +2,16 @@ class Api::CommentsController < ApplicationController
   before_action :must_be_logged_in, except: [:index, :show]
   before_action :must_be_commenter, only: [:destroy, :update, :edit]
   
+  def index
+    @comments = Comment.where(post_id: params[:post_id])
+    render json: @comments
+  end
+  
+  def comment_index
+    @comments = Comment.where(parent_comment_id: params[:parent_id])
+    render json: @comments
+  end
+  
   def new
     post = Post.find(params[:post_id])
     @comment = post.comments.new
@@ -13,7 +23,7 @@ class Api::CommentsController < ApplicationController
     if @comment.save
       render json: @comment
     else
-      render json: @comment.errors.full_messages, status: :unprocessable_entity
+      render json: {msg: "Comment could not be created."}, status: 422
     end
   end
   
@@ -23,12 +33,12 @@ class Api::CommentsController < ApplicationController
     if @comment.update_attributes(comment_params)
       render json: @comment
     else
-      render json: @comment.errors.full_messages, status: :unprocessable_entity
+      render json: {msg: "Comment could not be updated."}, status: 422
     end
   end
   
   def show
-    @comment = Comment.includes(:comments).find(params[:id])
+    @comment = Comment.includes(comments: [:submitter]).find(params[:id])
   end
   
   def destroy
