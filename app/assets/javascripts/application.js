@@ -15,6 +15,7 @@
 //= require jquery.serializeJSON
 //= require underscore
 //= require backbone
+//= require backbone_trigger_logger
 //= require marked
 //= require_tree ./utils
 //= require reddit

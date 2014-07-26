@@ -22,7 +22,8 @@ App.Views.commentForm = Backbone.View.extend({
 	removeThis: function(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		this.parent.removeSubview(this.el, this);
+		console.log("Parent's commentEl: " + this.parent.commentEl);
+		this.parent.removeSubview(this.parent.commentEl, this);
 	},
 	
 	saveComment: function(event) {
@@ -30,7 +31,7 @@ App.Views.commentForm = Backbone.View.extend({
 		event.stopPropagation();
 		var formData = $(event.target).serializeJSON();
 		formData.comment.post_id = this.parent.model.get("post_id");
-		formData.comment.parent_comment_id = this.parent.model.get("id");
+		formData.comment.parent_comment_id = this.parent.model.id;
 		
 		var that = this;
 		this.model.save(formData, {
@@ -38,7 +39,7 @@ App.Views.commentForm = Backbone.View.extend({
 				model.set({ post: that.parent.model.get("post") });
 				model.set({ submitter: user });
 				that.parent.model.comments().add(model);
-				that.parent.removeSubview(that.el, that);
+				that.parent.removeSubview(that.parent.commentEl, that);
 				console.log("Success!");
 			},
 			error: function(model, response, thing3) {

@@ -9,30 +9,20 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	initialize: function(options) {
 		this.parent = options.parent;	
+		this.commentEl = "ul.comments[data-parent-comment-id='" + this.model.id + "']";
 			
 		this.listenTo(this.model, "sync", this.render);
 		this.listenTo(this.model.comments(), "add", this.addComment);
-			
-		this.commentEl = "ul.comments[data-parent-comment-id='" + this.model.id + "']";
-		console.log(this.commentEl);
-		
+					
 		this.model.comments().each(this.addComment.bind(this));	
-		
-		this.events[this.eventKeys("deleteComment")] = "deleteComment";
-		this.events[this.eventKeys("editComment")] = "editComment";
-		this.events[this.eventKeys("replyForm")] = "showReplyForm";
 		
 	},
 	
 	events: {
-		// this.eventKeys(): "deleteComment",
-		// "click button.editComment": "editComment",
-		"submit form.commentForm": "updateComment"
-		// "click button.replyForm": "showReplyForm"
-	},
-	
-	eventKeys: function(btnClass) {
-		return "click button." + btnClass + "[data-comment-id='" + this.model.id + "']";
+		"click button.deleteComment": "deleteComment",
+		"click button.editComment": "editComment",
+		"submit form.commentForm": "updateComment",
+		"click button.replyForm": "showReplyForm"
 	},
 	
 	render: function() {
@@ -42,12 +32,11 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		});
 		this.$el.html(renderedContent);	
 		this.attachSubviews();	
+		// console.log("Subviews: " + this.subviews(this.commentEl).length);
 		return this;
 	},
 	
 	addComment: function(comment) {
-		// comment.set({ post: this.model.get("post") });
-		console.log(comment);
 		this.addSubview(this.commentEl, new App.Views.commentShow({
 			model: comment,
 			parent: this
@@ -56,31 +45,41 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	deleteComment: function(event) {
 		event.preventDefault();
-		event.stopImmediatePropagation();
-		this.model.destroy();
-		this.parent.removeSubview(this.el, this);
+		event.stopPropagation();
+		var that = this;
+		this.model.destroy({
+			success: function(model, response, options) {
+				console.log("Comment deleted");
+				that.parent.model.comments().remove(model);
+				that.parent.removeSubview(that.parent.commentEl, that);
+			},
+			
+			error: function(model, response, options) {
+				console.log("Comment could not be deleted!");
+			}
+		});
 	},
 	
 	editComment: function(event) {
 		event.preventDefault();
-		event.stopImmediatePropagation();
+		event.stopPropagation();
 		this.form = true;
 		this.render();
 	},
 	
 	updateComment: function(event) {
 		event.preventDefault();
-		event.stopImmediatePropagation();
+		event.stopPropagation();
 		this.form = false;
 		var formData = $(event.target).serializeJSON();
-		formData.id = this.model.get("id");
+		formData.id = this.model.id;
 		
 		this.model.save(formData, {
-			success: function(model, response) {
+			success: function(model, response, options) {
 				console.log("Comment updated!");
 			},
 
-			error: function(model, response) {
+			error: function(model, response, options) {
 				console.log("Comment could not be updated.");
 			}
 		});
@@ -88,7 +87,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	showReplyForm: function(event) {
 		event.preventDefault();
-		console.log(this.model.id);
+		event.stopPropagation();
 		var that = this;
 		var commentForm = new App.Views.commentForm({
 			//just for form, probably makes no sense to add ref to post here
