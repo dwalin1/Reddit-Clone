@@ -11,6 +11,10 @@ App.Collections.Comments = Backbone.Collection.extend({
 		}
 	},
 	
+	comparator: function(comment) {
+		return comment.get("created_at")
+	},
+	
 	initialize: function(models, options) {
 		this.post = options.post;
 		this.parent_comment = options.parent_comment;
