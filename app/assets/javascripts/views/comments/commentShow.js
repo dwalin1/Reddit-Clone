@@ -17,13 +17,22 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		console.log(this.commentEl);
 		
 		this.model.comments().each(this.addComment.bind(this));	
+		
+		this.events[this.eventKeys("deleteComment")] = "deleteComment";
+		this.events[this.eventKeys("editComment")] = "editComment";
+		this.events[this.eventKeys("replyForm")] = "showReplyForm";
+		
 	},
 	
 	events: {
-		"click button.deleteComment": "deleteComment",
-		"click button.editComment": "editComment",
-		"submit form.commentForm": "updateComment",
-		"click button.replyForm": "showReplyForm"
+		// this.eventKeys(): "deleteComment",
+		// "click button.editComment": "editComment",
+		"submit form.commentForm": "updateComment"
+		// "click button.replyForm": "showReplyForm"
+	},
+	
+	eventKeys: function(btnClass) {
+		return "click button." + btnClass + "[data-comment-id='" + this.model.id + "']";
 	},
 	
 	render: function() {
@@ -47,21 +56,21 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	deleteComment: function(event) {
 		event.preventDefault();
-		event.stopPropagation();
+		event.stopImmediatePropagation();
 		this.model.destroy();
 		this.parent.removeSubview(this.el, this);
 	},
 	
 	editComment: function(event) {
 		event.preventDefault();
-		event.stopPropagation();
+		event.stopImmediatePropagation();
 		this.form = true;
 		this.render();
 	},
 	
 	updateComment: function(event) {
 		event.preventDefault();
-		event.stopPropagation();
+		event.stopImmediatePropagation();
 		this.form = false;
 		var formData = $(event.target).serializeJSON();
 		formData.id = this.model.get("id");
@@ -79,7 +88,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	showReplyForm: function(event) {
 		event.preventDefault();
-		event.stopPropagation();
+		console.log(this.model.id);
 		var that = this;
 		var commentForm = new App.Views.commentForm({
 			//just for form, probably makes no sense to add ref to post here
