@@ -3,7 +3,7 @@ App.Models.Comment = Backbone.Model.extend({
 	
 	comments: function() {
 		this._comments = this._comments ||
-		new App.Collections.Comments(this.post.comments().where({
+		new App.Collections.Comments(this.get("post").comments().where({
 			parent_comment_id: this.id
 		}), 
 			{ parent_comment: this });

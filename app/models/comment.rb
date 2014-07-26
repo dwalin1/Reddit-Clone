@@ -39,6 +39,7 @@ class Comment < ActiveRecord::Base
     :comments,
     foreign_key: :parent_comment_id,
     primary_key: :id,
-    class_name: "Comment"
+    class_name: "Comment",
+    dependent: :destroy
   )
 end
