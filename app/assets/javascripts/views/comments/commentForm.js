@@ -24,6 +24,7 @@ App.Views.commentForm = Backbone.View.extend({
 		event.stopPropagation();
 		console.log("Parent's commentEl: " + this.parent.commentEl);
 		this.parent.removeSubview(this.parent.commentEl, this);
+		this.parent.showingReplyForm = false;
 	},
 	
 	saveComment: function(event) {
@@ -40,6 +41,7 @@ App.Views.commentForm = Backbone.View.extend({
 				model.set({ submitter: user });
 				that.parent.model.comments().add(model);
 				that.parent.removeSubview(that.parent.commentEl, that);
+				that.parent.showingReplyForm = false;
 				console.log("Success!");
 			},
 			error: function(model, response, thing3) {

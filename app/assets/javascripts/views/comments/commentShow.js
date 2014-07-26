@@ -8,7 +8,8 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	tagName: "li",
 	
 	initialize: function(options) {
-		this.parent = options.parent;	
+		this.parent = options.parent;
+		this.showingReplyForm = false;	
 		this.commentEl = "ul.comments[data-parent-comment-id='" + this.model.id + "']";
 			
 		this.listenTo(this.model, "sync", this.render);
@@ -88,9 +89,10 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	showReplyForm: function(event) {
 		event.preventDefault();
 		event.stopPropagation();
+		if (this.showingReplyForm) return;
+		this.showingReplyForm = true;
 		var that = this;
 		var commentForm = new App.Views.commentForm({
-			//just for form, probably makes no sense to add ref to post here
 			model: new App.Models.Comment({post: that.model.get("post")}),
 			parent: this
 		});

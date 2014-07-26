@@ -1,4 +1,4 @@
-json.extract!(@post, :title, :content, :sub_id)
+json.extract!(@post, :title, :content, :sub_id, :upvotes)
 
 json.submitter @post.submitter.username
 json.submitter_id @post.submitter.id

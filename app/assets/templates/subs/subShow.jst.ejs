@@ -18,10 +18,15 @@
 	<%= sub.escape("moderator") %> 
 </div>
 
+<% if (user_id) { %>
 <div class="postPost">
 </div>
-
+<% } else { %>
 <br>
+Log in to submit your own posts.
+<% } %>
+
+<br><br>
 <% sub.posts().each(function(post) { %>
 <div class="post">
 	<div class="title">	

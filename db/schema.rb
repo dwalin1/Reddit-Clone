@@ -11,36 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702235025) do
+ActiveRecord::Schema.define(version: 20140726221922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
-    t.text     "content",           null: false
-    t.integer  "submitter_id",      null: false
-    t.integer  "post_id",           null: false
+    t.text     "content",                       null: false
+    t.integer  "submitter_id",                  null: false
+    t.integer  "post_id",                       null: false
     t.integer  "parent_comment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "upvotes",           default: 0
   end
 
   add_index "comments", ["parent_comment_id"], name: "index_comments_on_parent_comment_id", using: :btree
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["submitter_id"], name: "index_comments_on_submitter_id", using: :btree
+  add_index "comments", ["upvotes"], name: "index_comments_on_upvotes", using: :btree
 
   create_table "posts", force: true do |t|
-    t.string   "title",        null: false
+    t.string   "title",                    null: false
     t.string   "url"
     t.text     "content"
-    t.integer  "sub_id",       null: false
-    t.integer  "submitter_id", null: false
+    t.integer  "sub_id",                   null: false
+    t.integer  "submitter_id",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "upvotes",      default: 0
   end
 
   add_index "posts", ["sub_id"], name: "index_posts_on_sub_id", using: :btree
   add_index "posts", ["submitter_id"], name: "index_posts_on_submitter_id", using: :btree
+  add_index "posts", ["upvotes"], name: "index_posts_on_upvotes", using: :btree
 
   create_table "subs", force: true do |t|
     t.string   "title",        null: false
