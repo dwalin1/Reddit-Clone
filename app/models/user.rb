@@ -37,6 +37,14 @@ class User < ActiveRecord::Base
     class_name:   "Comment"
   )
   
+  has_many(
+    :votes,
+    foreign_key:  :user_id,
+    primary_key:  :id,
+    class_name:   "Vote",
+    dependent: :destroy
+  )
+  
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)
     user.try { user.is_password?(password) ? user : nil }

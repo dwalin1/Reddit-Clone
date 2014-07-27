@@ -9,6 +9,8 @@
 #  parent_comment_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
+#  upvotes           :integer          default(0)
+#  downvotes         :integer          default(0), not null
 #
 
 class Comment < ActiveRecord::Base
@@ -42,5 +44,11 @@ class Comment < ActiveRecord::Base
     primary_key: :id,
     class_name: "Comment",
     dependent: :destroy
+  )
+  
+  has_many(
+    :votes,
+    dependent: :destroy,
+    as: :voteable
   )
 end

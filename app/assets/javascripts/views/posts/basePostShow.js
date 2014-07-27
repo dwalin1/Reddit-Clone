@@ -4,6 +4,7 @@ App.Views.basePostShow = Backbone.View.extend({
 	initialize: function(options) {
 		this.index = options.index;
 		this.listenTo(this.model, "sync", this.render);
+		this.listenTo(this.model, "change", this.render);
 	},
 	
 	events: {
@@ -22,26 +23,33 @@ App.Views.basePostShow = Backbone.View.extend({
 	
 	// actually will need a join table for upvotes to get them to persist and not have a user able to leave the Backbone session and then vote again; also this way will avoid the problem with permissions to update the model
 	
-	vote: function(n) {
-		if (this.voteState === n) return;
-		this.voteState = n;
-		this.model.set({upvotes: this.model.get("upvotes") + n});
-		this.model.save({}, {
+	vote: function(voteType) {
+		var vote = new App.Models.Vote({
+			voteable_id: this.model.id,
+			voteable_type: "Post",
+			vote_type: voteType	
+		});
+		
+		var post = this.model;
+		var inc = (voteType === "up") ? 1 : -1;
+		
+		vote.save({}, {
 			success: function() {
-				console.log("Model successfully saved.");
+				console.log("Vote successfully saved.");
+				post.set({ upvotes: post.get("upvotes") + inc });
 			},
 			
-			error: function() {
-				console.log("Error saving model.");
+			error: function(model, response) {
+				console.log("Error saving vote.");
 			}
 		})
 	},
 	
 	upvote: function() {
-		this.vote(1);
+		this.vote("up");
 	},
 	
 	downvote: function() {
-		this.vote(-1);
+		this.vote("down");
 	}
 });

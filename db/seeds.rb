@@ -44,7 +44,6 @@ User.all.each do |user|
       content: Faker::Lorem.sentence,
       sub_id: sub.id,
       submitter_id: user.id,
-      upvotes: rand(5000)
     )
   end
 end

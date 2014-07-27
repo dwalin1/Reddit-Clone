@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   
     resources :comments, except: [:index]
     
+    resources :votes, only: [:create, :destroy, :update]
+    
     # get "nested_comments/:parent_id/", to: "comments#comment_index"
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727063020) do
+ActiveRecord::Schema.define(version: 20140727154502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140727063020) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "upvotes",           default: 0
+    t.integer  "downvotes",         default: 0, null: false
   end
 
   add_index "comments", ["parent_comment_id"], name: "index_comments_on_parent_comment_id", using: :btree
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140727063020) do
     t.datetime "updated_at"
     t.integer  "upvotes",        default: 0
     t.integer  "comments_count", default: 0, null: false
+    t.integer  "downvotes",      default: 0, null: false
   end
 
   add_index "posts", ["sub_id"], name: "index_posts_on_sub_id", using: :btree
@@ -68,5 +70,18 @@ ActiveRecord::Schema.define(version: 20140727063020) do
 
   add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", using: :btree
+
+  create_table "votes", force: true do |t|
+    t.integer  "user_id",                      null: false
+    t.integer  "voteable_id",                  null: false
+    t.string   "voteable_type",                null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "vote_type",     default: "up", null: false
+  end
+
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["voteable_id"], name: "index_votes_on_voteable_id", using: :btree
+  add_index "votes", ["voteable_type"], name: "index_votes_on_voteable_type", using: :btree
 
 end

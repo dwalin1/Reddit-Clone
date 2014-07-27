@@ -2,14 +2,17 @@
 #
 # Table name: posts
 #
-#  id           :integer          not null, primary key
-#  title        :string(255)      not null
-#  url          :string(255)
-#  content      :text
-#  sub_id       :integer          not null
-#  submitter_id :integer          not null
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id             :integer          not null, primary key
+#  title          :string(255)      not null
+#  url            :string(255)
+#  content        :text
+#  sub_id         :integer          not null
+#  submitter_id   :integer          not null
+#  created_at     :datetime
+#  updated_at     :datetime
+#  upvotes        :integer          default(0)
+#  comments_count :integer          default(0), not null
+#  downvotes      :integer          default(0), not null
 #
 
 class Post < ActiveRecord::Base
@@ -35,5 +38,11 @@ class Post < ActiveRecord::Base
     primary_key:  :id,
     class_name:   "Comment",
     dependent: :destroy
+  )
+  
+  has_many(
+    :votes,
+    dependent: :destroy,
+    as: :voteable
   )
 end
