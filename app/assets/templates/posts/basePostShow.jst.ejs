@@ -4,16 +4,27 @@
 			<%= index + 1 %>
 		</div> -->
 		
-		<a class="row upvote">
-			<span class="glyphicon glyphicon-chevron-up"></span>
+		<a class="row">
+			<span class="upvote glyphicon glyphicon-chevron-up
+				<% if (activeVote === "up") { %>
+					activeVote
+				<% } %>
+				">
+			</span>
 		</a>
 				
 		<div class="row">
 			<%= post.get("upvotes") %>
 		</div>
 		
-		<a class="row downvote">
-			<span class="glyphicon glyphicon-chevron-down"></span>
+		<a class="row">
+			<span class="downvote 
+			glyphicon glyphicon-chevron-down
+			<% if (activeVote === "down") { %>
+				activeVote
+			<% } %>
+			">
+			</span>
 		</a>
 	</div>
 	<% if (false) { %>

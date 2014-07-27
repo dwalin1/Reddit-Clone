@@ -20,6 +20,7 @@ class Vote < ActiveRecord::Base
   
   after_create :vote_created
   after_destroy :vote_destroyed
+  after_update :vote_updated
   
   [:increment, :decrement].each do |type|
     define_method("#{type}_votes") do
@@ -51,5 +52,10 @@ class Vote < ActiveRecord::Base
   def vote_destroyed
     c_method = (vote_type == "up") ? "decrement" : "increment"
     change_vote_cache_counter(c_method)
+  end
+  
+  def vote_updated
+    c_method = (vote_type == "up") ? "increment" : "decrement"
+    2.times { change_vote_cache_counter(c_method) }
   end
 end

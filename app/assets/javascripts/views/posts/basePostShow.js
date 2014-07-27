@@ -8,43 +8,52 @@ App.Views.basePostShow = Backbone.View.extend({
 	},
 	
 	events: {
-		"click a.upvote": "upvote",
-		"click a.downvote": "downvote"
+		"click span.upvote": "voteClick",
+		"click span.downvote": "voteClick"
 	},
 	
 	render: function() {
 		var renderedContent = this.template({
 			post: this.model,
-			index: this.index
+			index: this.index,
+			activeVote: this.vote().get("vote_type")
 		});
 		this.$el.html(renderedContent);
 		return this;
 	},
 	
-	// actually will need a join table for upvotes to get them to persist and not have a user able to leave the Backbone session and then vote again; also this way will avoid the problem with permissions to update the model
+	vote: function() {
+		var voteHash = this.model.get("votes")[0] || 
+		{ voteable_id: this.model.id, voteable_type: "Post"};
+		this._vote = this._vote || new App.Models.Vote(voteHash);
+		return this._vote;
+	},
 	
-	vote: function(voteType) {
-		if (this.voted === voteType) {
-			// destroy the vote
-		} else if (this.voted) {
-			// update the vote to the new voteType
-		} 
+	voteClick: function(event) {
+		event.preventDefault();
+		var newVoteType = $(event.target).hasClass("upvote") ? "up" : "down";
+		var oldVoteType = this.vote().get("vote_type");
 		
-		var vote = new App.Models.Vote({
-			voteable_id: this.model.id,
-			voteable_type: "Post",
-			vote_type: voteType	
-		});
+		if (oldVoteType === newVoteType) {
+			this.deleteVote(oldVoteType);
+		} else {
+			this.saveVote(newVoteType);
+		}
+	},
 		
+	saveVote: function(newVoteType) {
+		var vote = this.vote();
+		var post = this.model;
 		var that = this;
-		post = this.model;
-		var inc = (voteType === "up") ? 1 : -1;
+		var inc = (newVoteType === "up") ? 1 : -1;
+		var inc = (vote.isNew()) ? inc : (inc * 2);
 		
-		vote.save({}, {
+		vote.save({ vote_type: newVoteType }, {
 			success: function() {
-				console.log("Vote successfully saved.");
+				console.log("Success!");
 				post.set({ upvotes: post.get("upvotes") + inc });
-				that.voted = voteType;
+				// console.log(that._vote.get("vote_type"));
+				// vote is a reference to this._vote, and save mutates; therefore, no need to change this._vote here, as the above console.log demonstrates
 			},
 			
 			error: function(model, response) {
@@ -53,11 +62,23 @@ App.Views.basePostShow = Backbone.View.extend({
 		})
 	},
 	
-	upvote: function() {
-		this.vote("up");
-	},
-	
-	downvote: function() {
-		this.vote("down");
+	deleteVote: function(voteType) {
+		var that = this;
+		var post = this.model;
+		var inc = (voteType === "up") ? -1 : 1;
+		
+		this.vote().destroy({
+			success: function(model, response) {
+				console.log("Vote destroyed.");
+				// Here, by contrast, we must handle this.vote()  ourselves
+				post.set({ votes: [] });
+				that._vote = undefined;
+				post.set({ upvotes: post.get("upvotes") + inc });
+			},
+			
+			error: function(model, response) {
+				console.log("Error destroying vote.");
+			}
+		});
 	}
 });

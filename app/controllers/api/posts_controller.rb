@@ -3,7 +3,7 @@ class Api::PostsController < ApplicationController
   before_action :must_be_poster, only: [:edit, :update, :destroy]
   
   def index
-    @posts = Post.includes(:sub, :submitter).order(upvotes: :desc)
+    @posts = Post.includes(:sub, :submitter, :votes).order(upvotes: :desc)
   end
   
   def new

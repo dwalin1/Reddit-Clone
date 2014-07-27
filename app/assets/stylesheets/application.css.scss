@@ -92,3 +92,11 @@ li {
 	border: dotted 1px #99455F;
 	border-radius: 5px;
 }
+
+span.activeVote.upvote {
+	color: #37992E;
+}
+
+span.activeVote.downvote {
+	color: #F01439;
+}
