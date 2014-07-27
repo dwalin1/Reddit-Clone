@@ -10,7 +10,6 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  upvotes           :integer          default(0)
-#  downvotes         :integer          default(0), not null
 #
 
 class Comment < ActiveRecord::Base

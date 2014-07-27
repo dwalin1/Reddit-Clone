@@ -15,12 +15,11 @@ class Vote < ActiveRecord::Base
   validates :user_id, :voteable_id, :voteable_type, null: false
   validates :user_id, uniqueness: { scope: :voteable_id }
   
-  #I don't use counter_cache here because it can't handle votes of different types; instead, I write my own functionality for that (courtesy of http://joshsymonds.com/blog/2012/10/29/dynamic-cache-counters-in-rails/)
-  
+  #I don't use counter_cache here because it can't handle votes of different types; instead, I write my own functionality for that below
   belongs_to :voteable, polymorphic: true, touch: true
   
-  after_create :increment_votes
-  after_destroy :decrement_votes
+  after_create :vote_created
+  after_destroy :vote_destroyed
   
   [:increment, :decrement].each do |type|
     define_method("#{type}_votes") do
@@ -31,5 +30,26 @@ class Vote < ActiveRecord::Base
         self.voteable_id
         )
     end
+  end
+  
+  private
+  
+  def change_vote_cache_counter(counter_method)
+    voteable_type.classify.constantize
+    .send(
+      "#{counter_method}_counter",
+      :upvotes,
+      self.voteable_id
+    )
+  end
+  
+  def vote_created
+    c_method = (vote_type == "up") ? "increment" : "decrement"
+    change_vote_cache_counter(c_method)
+  end
+  
+  def vote_destroyed
+    c_method = (vote_type == "up") ? "decrement" : "increment"
+    change_vote_cache_counter(c_method)
   end
 end

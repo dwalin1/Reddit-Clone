@@ -12,7 +12,6 @@
 #  updated_at     :datetime
 #  upvotes        :integer          default(0)
 #  comments_count :integer          default(0), not null
-#  downvotes      :integer          default(0), not null
 #
 
 class Post < ActiveRecord::Base
