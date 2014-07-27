@@ -42,6 +42,8 @@ gem "figaro"
 
 gem 'faker'
 
+gem 'kaminari'
+
 group :development do
   gem 'pry-rails'
   gem 'annotate'

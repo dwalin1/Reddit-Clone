@@ -1,0 +1,55 @@
+<div class="row post">
+	<div class="col-xs-1">
+		<!-- <div class="row">
+			<%= index + 1 %>
+		</div> -->
+		
+		<a class="row upvote">
+			<span class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+				
+		<div class="row">
+			<%= post.get("upvotes") %>
+		</div>
+		
+		<a class="row downvote">
+			<span class="glyphicon glyphicon-chevron-down"></span>
+		</a>
+	</div>
+	<% if (false) { %>
+	<div class="col-xs-2">
+		<img src="<% post.escape('url') %>">
+	</div>
+	
+	<div class="col-xs-9">
+	<% } else { %>
+	<div class="col-xs-11">
+	<% } %>
+	
+		<div class="postRow1 row">
+			<div class="title col-xs-12">	
+				<a href="<%= post.escape('url') %>">
+					<%= post.escape("title") %>
+				</a>
+			</div>
+		</div>
+		
+		<div class="postRow2 row">
+			<div class="author cols-xs-12">
+<p>submitted <%= post.get("ago") %> ago by <%= post.escape("submitter") %>  to 
+	<a href="<%= post.get('sub_url') %>">
+		<%= post.escape("sub") %>
+	</a>
+</p>
+			</div>
+		</div>
+		
+		<div class="postRow3 row">
+			<div class="commentsLink cols-xs-12">
+				<a href="#posts/<%= post.id %>">
+					<%= post.get("comment_count") %> comments
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

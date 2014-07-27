@@ -4,4 +4,5 @@ json.array! @posts do |post|
   json.submitter post.submitter.username
   json.sub post.sub.title
   json.sub_url "#subs/#{post.sub.id}"
+  json.comment_count post.comments.length
 end
