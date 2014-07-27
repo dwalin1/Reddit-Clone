@@ -1,6 +1,7 @@
 App.Routers.AppRouter = Backbone.Router.extend({
 	routes: {
-		"": "subsIndex",
+		"": "frontPage",
+		"subs": "subsIndex",
 		"subs/new": "subForm",
 		"subs/:id/edit": "subForm",
 		"subs/:id": "subShow",
@@ -11,6 +12,14 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	
 	initialize: function(options) {
 		this.$rootEl = options.$rootEl;
+	},
+	
+	frontPage: function() {
+		App.posts.fetch();
+		var view = new App.Views.postsIndex({
+			collection: App.posts
+		});
+		this._swapView(view);
 	},
 	
 	subsIndex: function() {

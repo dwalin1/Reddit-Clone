@@ -40,13 +40,13 @@ Log in to submit your own posts.
 			<%= post.escape("submitter") %>
 		</span>
 		<br>
-		<% if (sub.get("user_id") === post.get("submitter_id")) { %>
+		<% if (user_id === post.get("submitter_id")) { %>
 			(That's you!)
 		<% } %>
 	</div>
 	
 	<div class="commentsLink">
-		<a href="#posts/<%= post.get("id") %>">
+		<a href="#posts/<%= post.id %>">
 			Some number of comments
 		</a>
 	</div>

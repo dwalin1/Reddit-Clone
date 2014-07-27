@@ -49,13 +49,14 @@ body {
 }
 
 .post {
-	border-color: orange;
-	border-width: 1px;
-	border-style: dashed;
+	border: dashed orange 1px;
+	border-radius: 10px;
 	padding-top: 5px;
 	padding-left: 5px;
 	padding-right: 5px;
-	padding-bottom: 18px;	
+	padding-bottom: 18px;
+	margin-bottom: 10px;	
+	background-color: #B28178;
 }
 
 .title {
