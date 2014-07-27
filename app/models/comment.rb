@@ -25,7 +25,8 @@ class Comment < ActiveRecord::Base
     :post,
     foreign_key: :post_id,
     primary_key: :id,
-    class_name:  "Post"
+    class_name:  "Post",
+    counter_cache: true
   )
   
   belongs_to(

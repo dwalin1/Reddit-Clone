@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726221922) do
+ActiveRecord::Schema.define(version: 20140727063020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,14 +32,15 @@ ActiveRecord::Schema.define(version: 20140726221922) do
   add_index "comments", ["upvotes"], name: "index_comments_on_upvotes", using: :btree
 
   create_table "posts", force: true do |t|
-    t.string   "title",                    null: false
+    t.string   "title",                      null: false
     t.string   "url"
     t.text     "content"
-    t.integer  "sub_id",                   null: false
-    t.integer  "submitter_id",             null: false
+    t.integer  "sub_id",                     null: false
+    t.integer  "submitter_id",               null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "upvotes",      default: 0
+    t.integer  "upvotes",        default: 0
+    t.integer  "comments_count", default: 0, null: false
   end
 
   add_index "posts", ["sub_id"], name: "index_posts_on_sub_id", using: :btree
