@@ -15,10 +15,12 @@ App.Views.basePostShow = Backbone.View.extend({
 	},
 	
 	render: function() {
+		var activeVote = (user_id) ? this.vote().get("vote_type") : false;
+		
 		var renderedContent = this.template({
 			post: this.model,
 			index: this.index,
-			activeVote: this.vote().get("vote_type"),
+			activeVote: activeVote,
 			hasImg: this.hasImg()
 		});
 		this.$el.html(renderedContent);
@@ -35,6 +37,7 @@ App.Views.basePostShow = Backbone.View.extend({
 	},
 	
 	vote: function() {
+		if (!user_id) return false;
 		var voteHash = this.model.get("votes")[0] || 
 		{ voteable_id: this.model.id, voteable_type: "Post"};
 		this._vote = this._vote || new App.Models.Vote(voteHash);
@@ -43,6 +46,10 @@ App.Views.basePostShow = Backbone.View.extend({
 	
 	voteClick: function(event) {
 		event.preventDefault();
+		if (!user_id) {
+			alert("You have to log in for that.");
+			return;
+		}
 		var newVoteType = $(event.target).hasClass("upvote") ? "up" : "down";
 		var oldVoteType = this.vote().get("vote_type");
 		

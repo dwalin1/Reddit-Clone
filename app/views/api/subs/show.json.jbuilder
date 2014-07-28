@@ -8,7 +8,9 @@ json.posts @sub.posts do |post|
   json.ago time_ago_in_words(post.created_at)
   json.submitter post.submitter.username
   
-  json.votes(post.votes.where(user_id: current_user.id)) do |vote|
-    json.extract!(vote, :id, :voteable_id, :vote_type)
+  if current_user
+    json.votes(post.votes.where(user_id: current_user.id)) do |vote|
+      json.extract!(vote, :id, :voteable_id, :vote_type)
+    end
   end
 end
