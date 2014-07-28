@@ -21,7 +21,7 @@ class Api::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     
     if @comment.save
-      render json: @comment
+      render "show"
     else
       render json: {msg: "Comment could not be created."}, status: 422
     end
@@ -31,7 +31,7 @@ class Api::CommentsController < ApplicationController
     @comment = current_user.comments.find(params[:id])
     
     if @comment.update_attributes(comment_params)
-      render json: @comment
+      render "show"
     else
       render json: {msg: "Comment could not be updated."}, status: 422
     end

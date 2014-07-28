@@ -1,4 +1,4 @@
-json.extract!(@post, :title, :url, :id, :comments_count, :upvotes)
+json.extract!(@post, :title, :url, :id, :comments_count, :upvotes, :content)
 
 json.ago time_ago_in_words(@post.created_at)
 json.sub @post.sub.title

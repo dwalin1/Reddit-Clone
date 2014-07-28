@@ -1,5 +1,9 @@
 <div class="post-container"></div>
 
+<div class="bottomSpace">
+	<%= post.escape("content") %>
+</div>
+
 <% if(user === post.get("submitter")) { %>
 	<div class="row">
 		<a href="#posts/<%= post.id %>/edit" 
@@ -13,7 +17,7 @@
 <% } %>
 
 <% if (user_id) { %>
-<div class="top-level-comment-form row">
+<div class="top-level-comment-form row bottomSpace">
 	<form class="commentForm">
 		<textarea 
 			placeholder="Comment here"
