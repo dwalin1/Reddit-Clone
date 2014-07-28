@@ -4,6 +4,13 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	initialize: function() {
 		var view = this;
 		this.commentEl = "ul.post-comments";
+		this.listenToOnce(this.model, "sync", function() {
+			this.addSubview("div.post-container", new App.Views.basePostShow({
+				model: this.model,
+				index: false
+			}));	
+		});
+		
 		this.model.top_level_comments().each(this.addComment.bind(this));
 		
 		this.listenTo(this.model, "sync", this.render);
@@ -26,7 +33,7 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	
 	addComment: function(comment) {
 		// comment.set({ post: this.model });
-		this.addSubview("ul.post-comments", new App.Views.commentShow({
+		this.addSubview(this.commentEl, new App.Views.commentShow({
 			model: comment,
 			parent: this
 		}));
