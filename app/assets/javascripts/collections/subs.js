@@ -20,4 +20,4 @@ App.Collections.Subs = Backbone.Collection.extend({
 	}
 })
 
-App.subs = new App.Collections.Subs;
+App.subs = new App.Collections.Subs();

@@ -27,29 +27,5 @@ Log in to submit your own posts.
 <% } %>
 
 <br><br>
-<% sub.posts().each(function(post) { %>
-<div class="post">
-	<div class="title">	
-		<a href="<%= post.escape('url') %>">
-			<%= post.escape("title") %>
-		</a>
-	</div>
-	
-	<div class="author">
-		<span class="authorname">
-			<%= post.escape("submitter") %>
-		</span>
-		<br>
-		<% if (user_id === post.get("submitter_id")) { %>
-			(That's you!)
-		<% } %>
-	</div>
-	
-	<div class="commentsLink">
-		<a href="#posts/<%= post.id %>">
-			Some number of comments
-		</a>
-	</div>
+<div class="posts-list">
 </div>
-<br>
-<% }) %>

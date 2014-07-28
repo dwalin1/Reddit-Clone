@@ -39,7 +39,8 @@
 	
 		<div class="postRow1 row">
 			<div class="title col-xs-12">	
-				<a href="<%= post.escape('url') %>">
+				<a href="<%= post.escape('url') || 
+				"#posts/" + post.id %>">
 					<%= post.escape("title") %>
 				</a>
 			</div>
@@ -47,10 +48,13 @@
 		
 		<div class="postRow2 row">
 			<div class="author cols-xs-12">
-<p>submitted <%= post.get("ago") %> ago by <%= post.escape("submitter") %>  to 
+<p>submitted <%= post.get("ago") %> ago by <%= post.escape("submitter") %>  
+	<% if (post.escape("sub")) { %>
+	to 
 	<a href="<%= post.get('sub_url') %>">
 		<%= post.escape("sub") %>
 	</a>
+	<% } %>
 </p>
 			</div>
 		</div>

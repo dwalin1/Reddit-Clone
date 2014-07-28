@@ -26,5 +26,5 @@ App.Views.postsIndex = Backbone.CompositeView.extend({
 			model: post,
 			index: index
 		}));
-	},
+	}
 });

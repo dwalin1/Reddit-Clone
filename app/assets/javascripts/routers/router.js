@@ -31,7 +31,8 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	},
 	
 	subShow: function(id) {
-		var sub = App.subs.getOrFetch(id);
+		var sub = new App.Models.Sub({ id: id });
+		sub.fetch();		
 		var view = new App.Views.subShow({
 			model: sub
 		});

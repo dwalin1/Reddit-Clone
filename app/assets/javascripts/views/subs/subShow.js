@@ -1,17 +1,21 @@
 App.Views.subShow = Backbone.CompositeView.extend({
 	template: JST["subs/subShow"],
 	
-	initialize: function() {
-		
+	initialize: function() {		
 		var newPostView = new App.Views.postForm({
 			model: new App.Models.Post({
-				sub_id: this.model.get("id")	
+				sub_id: this.model.id	
 			})
 		});
 		
 		this.addSubview("div.postPost", newPostView);
 		
-		this.listenTo(this.model, "sync", this.render);		
+		this.listenToOnce(this.model, "sync", function() {
+			this.model.posts().each(this.addPost.bind(this));
+		});
+		
+		this.listenTo(this.model, "sync", this.render);
+		this.listenTo(this.model.posts(), "sync", this.render);		
 	},
 	
 	events: {
@@ -31,5 +35,12 @@ App.Views.subShow = Backbone.CompositeView.extend({
 	deleteSub: function() {
 		this.model.destroy();
 		App.router.navigate("#", { trigger: true });
+	},
+	
+	addPost: function(post, index) {
+		this.addSubview("div.posts-list", new App.Views.basePostShow({
+			model: post,
+			index: index
+		}));
 	}
 });

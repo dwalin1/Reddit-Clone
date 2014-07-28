@@ -7,7 +7,7 @@ class Api::SubsController < ApplicationController
   end
   
   def show
-    @sub = Sub.includes(posts: [:submitter], moderator: [:username, :id]).find(params[:id])
+    @sub = Sub.includes(posts: [:submitter, :votes], moderator: [:username, :id]).find(params[:id])
   end
   
   def new
