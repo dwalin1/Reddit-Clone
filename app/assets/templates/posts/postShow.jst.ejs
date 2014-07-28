@@ -1,13 +1,15 @@
 <div class="post-container"></div>
 
-<% if(user_id === post.get("submitter_id")) { %>
+<% if(user === post.get("submitter")) { %>
+	<div class="row">
 		<a href="#posts/<%= post.id %>/edit" 
-			class="btn btn-warning">
+			class="btn btn-link linkButton">
 			Edit Post
 		</a>
-		<button class="deletePost btn btn-danger">
+		<button class="deletePost btn btn-link linkButton">
 			Delete Post
 		</button>
+	</div>
 <% } %>
 
 <% if (user_id) { %>
@@ -18,12 +20,11 @@
 			class="form-control"
 			rows="3"
 			name="comment[content]"></textarea>
-		
 		<input type="submit" value="Post" class="btn btn-primary">
 	</form>
 </div>
 <% } else { %>
-<h5 class="row">Log in to comment.</h5>
+<h5 class="row">Log in to comment or vote.</h5>
 <% } %>
 
 <ul class="row post-comments">

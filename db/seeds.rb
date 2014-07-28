@@ -57,7 +57,7 @@ end
 #   end
 # end
 
-images = %w(http://i.imgur.com/2UH7t8z.jpg http://i.imgur.com/IAYZ20i.jpg http://i.imgur.com/T3MwFfD.jpg http://i.imgur.com/VU6qzAM.jpg http://i.imgur.com/tllKLiU.jpg http://pustovoy.35photo.ru/photos/20140519/714326.jpg http://imgur.com/V0T84Xy http://i.imgur.com/IiesWJw.jpg http://i.imgur.com/ExHKn0u.jpg http://imgur.com/01nibU3 http://i.imgur.com/Tt43eLl.jpg http://i.imgur.com/T9olOZT.jpg)
+images = %w(http://i.imgur.com/2UH7t8z.jpg http://i.imgur.com/IAYZ20i.jpg http://i.imgur.com/T3MwFfD.jpg http://i.imgur.com/VU6qzAM.jpg http://i.imgur.com/tllKLiU.jpg http://imgur.com/V0T84Xy http://i.imgur.com/IiesWJw.jpg http://i.imgur.com/ExHKn0u.jpg http://imgur.com/01nibU3 http://i.imgur.com/Tt43eLl.jpg http://i.imgur.com/T9olOZT.jpg)
 images.each do |img, i|
   Post.create!(
   title: Faker::Lorem.sentence,

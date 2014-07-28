@@ -96,6 +96,6 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 			model: new App.Models.Comment({post: that.model.get("post")}),
 			parent: this
 		});
-		this.addSubview(this.$el.children("div.replyForm"), commentForm);
+		this.addSubview(this.$el.children("ul.replyForm"), commentForm);
 	}
 })

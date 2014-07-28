@@ -1,4 +1,4 @@
-<div>	
+<div class="row">	
 	<% if (user_id === sub.get("moderator_id")) { %>
 		<div class="author">
 			<a href="#subs/<%= sub.get('id') %>/edit" 
@@ -19,13 +19,12 @@
 </div>
 
 <% if (user_id) { %>
-<div class="postPost">
+<div class="postPost row">
 </div>
 <% } else { %>
-<br>
-Log in to submit your own posts.
+
+<h5 class="row"> Log in to submit your own posts or vote.</h5>
 <% } %>
 
-<br><br>
-<div class="posts-list">
+<div class="posts-list row">
 </div>

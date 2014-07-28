@@ -11,22 +11,25 @@
 	
 		<div class="buttons col-xs-3">
 			<% if (user_id === comment.get("submitter_id")) { %>
-			<button class="editComment btn btn-warning pull-right">
+			<button 
+			class="editComment btn btn-xs btn-link linkButton">
 				Edit
 			</button>
-			<button class="deleteComment btn btn-danger pull-right">
+			<button 
+			class="deleteComment btn btn-xs btn-link linkButton">
 				Delete
 			</button>
 			<% } else { %>
 			<% } %>
-			<button class="replyForm btn btn-info pull-right">
+			<button 
+			class="replyForm btn btn-xs btn-link linkButton">
 				Reply
 			</button>
 		</div>
 </div>
 
-<div class="replyForm"></div>
+<ul class="replyForm row"></ul>
 	
-<ul class="comments" data-parent-comment-id="<%= comment.id %>">
+<ul class="comments row" data-parent-comment-id="<%= comment.id %>">
 </ul>	
 

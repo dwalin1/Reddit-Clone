@@ -1,6 +1,8 @@
 App.Views.commentForm = Backbone.View.extend({
 	template: JST["comments/commentForm"],
 	
+	className: "li",
+	
 	initialize: function(options) {
 		this.listenTo(this.model, "sync", this.render);
 		this.parent = options.parent;		
@@ -29,7 +31,7 @@ App.Views.commentForm = Backbone.View.extend({
 	
 	saveComment: function(event) {
 		event.preventDefault();
-		event.stopPropagation();
+		event.stopPropagation();		
 		var formData = $(event.target).serializeJSON();
 		formData.comment.post_id = this.parent.model.get("post_id");
 		formData.comment.parent_comment_id = this.parent.model.id;
