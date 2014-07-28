@@ -22,9 +22,10 @@ class Sub < ActiveRecord::Base
   
   has_many(
     :posts,
+    -> { order('upvotes DESC') },  
     foreign_key:  :sub_id,
     primary_key:  :id,
     class_name:   "Post",
-    dependent: :destroy
+    dependent: :destroy, 
   )
 end

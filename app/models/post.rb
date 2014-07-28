@@ -33,6 +33,7 @@ class Post < ActiveRecord::Base
   
   has_many(
     :comments,
+    -> { order('upvotes DESC') },
     foreign_key:  :post_id,
     primary_key:  :id,
     class_name:   "Comment",
