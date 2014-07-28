@@ -89,8 +89,9 @@ li {
 }
 
 .comment {
-	border: dotted 1px #99455F;
-	border-radius: 5px;
+//	border: dotted 1px #99455F;
+//	border-radius: 5px;
+	margin-bottom: 10px;
 }
 
 span.activeVote.upvote {
@@ -110,10 +111,6 @@ div.postPost, div.top-level-comment-form {
 	margin-bottom: 20px;
 }
 
-form .commentForm {
-	
-}
-
 .linkButton {
 	text-decoration: none;
 	color: white;
@@ -122,4 +119,13 @@ form .commentForm {
 .linkButton:hover {
 	text-decoration: none;
 	color: #FCEF2D;
-};
+}
+
+div.commentElementDiv {
+	display: inline;
+	margin: 2px;
+}
+
+div.commentButtons {
+	margin-left: 20px;
+}

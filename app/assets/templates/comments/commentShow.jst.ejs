@@ -1,31 +1,62 @@
-<div class="comment row">
-		<div class="col-xs-8 title">
-			<%= comment.escape("content") %>
+<div class="row">
+	<div class="col-xs-12 comment">
+		<div class="row">
+			<div class="commentElementDiv">
+			<a>
+				<span class="upvote glyphicon 
+					glyphicon-chevron-up
+					<% if (activeVote === "up") { %>
+						activeVote
+					<% } %>
+					">
+				</span>
+			</a>
+			</div>
+			
+			<div class="commentElementDiv">
+				<%= comment.escape("submitter") %> 
+				0 points some time ago
+			</div>
 		</div>
-		
-		<div class="col-xs-1 author">	
-			<span class="authorname pull-left">
-				<%= comment.escape("submitter") %>
-			</span>
+
+		<div class="row">
+			<div class="commentElementDiv">
+				<a>
+					<span class="downvote 
+					glyphicon glyphicon-chevron-down
+					<% if (activeVote === "down") { %>
+						activeVote
+					<% } %>
+					">
+					</span>
+				</a>
+			</div>
+			
+			<div class="commentElementDiv">
+				<%= comment.escape("content") %>
+			</div>
 		</div>
 	
-		<div class="buttons col-xs-3">
+		<div class="row ">
+			<div class="commentButtons">
 			<% if (user_id === comment.get("submitter_id")) { %>
 			<button 
-			class="editComment btn btn-xs btn-link linkButton pull-right">
+			class="editComment btn btn-xs btn-link linkButton">
 				Edit
 			</button>
 			<button 
-			class="deleteComment btn btn-xs btn-link linkButton pull-right">
+			class="deleteComment btn btn-xs btn-link linkButton">
 				Delete
 			</button>
 			<% } else { %>
 			<% } %>
 			<button 
-			class="replyForm btn btn-xs btn-link linkButton pull-right">
+			class="replyForm btn btn-xs btn-link linkButton">
 				Reply
 			</button>
+			</div>
 		</div>
+	</div>
 </div>
 
 <ul class="replyForm row"></ul>

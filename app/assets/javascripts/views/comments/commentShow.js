@@ -7,6 +7,8 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	tagName: "li",
 	
+	className: "container container-fluid",
+		
 	initialize: function(options) {
 		this.parent = options.parent;
 		this.showingReplyForm = false;	
@@ -30,6 +32,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		template = this.form ? this.formTemplate : this.template;
 		var renderedContent = template({
 			comment: this.model,
+			activeVote: false
 		});
 		this.$el.html(renderedContent);	
 		this.attachSubviews();	
