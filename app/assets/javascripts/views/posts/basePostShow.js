@@ -1,6 +1,8 @@
 App.Views.basePostShow = Backbone.View.extend({
 	template: JST["posts/basePostShow"],
 	
+	className: "row post", 
+	
 	initialize: function(options) {
 		this.index = options.index;
 		this.listenTo(this.model, "sync", this.render);
@@ -16,10 +18,20 @@ App.Views.basePostShow = Backbone.View.extend({
 		var renderedContent = this.template({
 			post: this.model,
 			index: this.index,
-			activeVote: this.vote().get("vote_type")
+			activeVote: this.vote().get("vote_type"),
+			hasImg: this.hasImg()
 		});
 		this.$el.html(renderedContent);
 		return this;
+	},
+	
+	hasImg: function() {
+		var url = this.model.get("url");
+		if (url.slice(url.length-4) === ".jpg") {
+			return true;
+		} else {
+			return false;
+		}
 	},
 	
 	vote: function() {
