@@ -13,13 +13,12 @@
 #always use rake db:reset, which will erase the db before recreating it
 #if you run rake db:seed it will do this on top of what is already in the db, and it will take forever because the number of things increases exponentially
 
-#10 users
-10.times do
-  ActiveRecord::Base.transaction do   
+5.times do
+  ActiveRecord::Base.transaction do
     u = User.create!(
       username: Faker::Internet.user_name,
       password: "password"
-    ) 
+    )
   end
 end
 
@@ -30,10 +29,10 @@ subs.each do |sub|
     title: "r/#{sub}",
     description: Faker::Lorem.sentence(3),
     moderator_id: User.all.sample.id
-  ) 
+  )
 end
 
-#20 Posts
+# 20 Posts
 # User.all.each do |user|
 #   Sub.all.each do |sub|
 #     Post.create!(
@@ -45,8 +44,8 @@ end
 #     )
 #   end
 # end
-
-#200 comments; all should have default of 0 upvotes
+#
+# 200 comments; all should have default of 0 upvotes
 # User.all.each do |user|
 #   Post.all.each do |post|
 #     Comment.create!(
@@ -73,7 +72,7 @@ User.all.each do |user|
     r = rand(10)
     next if r < 2
     v = (r < 8) ? "up" : "down"
-    
+
     Vote.create!(
     user_id: user.id,
     voteable_id: post.id,
@@ -82,5 +81,38 @@ User.all.each do |user|
     )
   end
 end
+
+#create a large comment structure on one post
+post = Post.all.sample
+
+users = User.all.shuffle
+#5 users -> 5 comments
+users.each do |user|
+  Comment.create!(
+  content: Faker::Lorem.sentence,
+  submitter_id: user.id,
+  post_id: post.id,
+  parent_comment_id: nil
+  )
+end
+
+# 1: 5 * 5 = 25 comments
+1.times do
+  users = User.all.shuffle
+  comments = post.comments.clone
+  
+  users.each do |user|
+    comments.each do |comment|
+      Comment.create!(
+      content: Faker::Lorem.sentence,
+      submitter_id: user.id,
+      post_id: post.id,
+      parent_comment_id: comment.id
+      )
+    end
+  end
+end
+    
+  
 
 

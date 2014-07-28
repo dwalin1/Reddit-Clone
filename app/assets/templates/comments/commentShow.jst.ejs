@@ -4,7 +4,7 @@
 		</div>
 		
 		<div class="col-xs-1 author">	
-			<span class="authorname">
+			<span class="authorname pull-left">
 				<%= comment.escape("submitter") %>
 			</span>
 		</div>
@@ -12,17 +12,17 @@
 		<div class="buttons col-xs-3">
 			<% if (user_id === comment.get("submitter_id")) { %>
 			<button 
-			class="editComment btn btn-xs btn-link linkButton">
+			class="editComment btn btn-xs btn-link linkButton pull-right">
 				Edit
 			</button>
 			<button 
-			class="deleteComment btn btn-xs btn-link linkButton">
+			class="deleteComment btn btn-xs btn-link linkButton pull-right">
 				Delete
 			</button>
 			<% } else { %>
 			<% } %>
 			<button 
-			class="replyForm btn btn-xs btn-link linkButton">
+			class="replyForm btn btn-xs btn-link linkButton pull-right">
 				Reply
 			</button>
 		</div>
