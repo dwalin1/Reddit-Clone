@@ -15,7 +15,8 @@
 			
 			<div class="commentElementDiv">
 				<%= comment.escape("submitter") %> 
-				0 points some time ago
+				<%= comment.get("upvotes") %> points
+				<%= comment.get("ago") %> ago
 			</div>
 		</div>
 

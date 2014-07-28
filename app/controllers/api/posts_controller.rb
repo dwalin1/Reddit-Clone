@@ -42,7 +42,7 @@ class Api::PostsController < ApplicationController
   end
   
   def show
-    @post = Post.includes(:submitter, :comments => [:submitter]).find(params[:id])
+    @post = Post.includes(:submitter, :comments => [:submitter, :votes]).find(params[:id])
   end
   
   private
