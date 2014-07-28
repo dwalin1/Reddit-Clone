@@ -15,6 +15,8 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		this.commentEl = "ul.comments[data-parent-comment-id='" + this.model.id + "']";
 			
 		this.listenTo(this.model, "sync", this.render);
+		this.listenTo(this.model, "change", this.render);
+		
 		this.listenTo(this.model.comments(), "add", this.addComment);
 					
 		this.model.comments().each(this.addComment.bind(this));	
@@ -25,14 +27,18 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		"click button.deleteComment": "deleteComment",
 		"click button.editComment": "editComment",
 		"submit form.commentForm": "updateComment",
-		"click button.replyForm": "showReplyForm"
+		"click button.replyForm": "showReplyForm",
+		"click span.upvote": "voteClick",
+		"click span.downvote": "voteClick"
 	},
 	
 	render: function() {
 		template = this.form ? this.formTemplate : this.template;
+		var activeVote = (user_id) ? this.vote().get("vote_type") : false;
+		
 		var renderedContent = template({
 			comment: this.model,
-			activeVote: false
+			activeVote: activeVote
 		});
 		this.$el.html(renderedContent);	
 		this.attachSubviews();	

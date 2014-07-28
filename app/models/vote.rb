@@ -13,7 +13,7 @@
 
 class Vote < ActiveRecord::Base
   validates :user_id, :voteable_id, :voteable_type, null: false
-  validates :user_id, uniqueness: { scope: :voteable_id }
+  validates :user_id, uniqueness: { scope: [:voteable_id, :voteable_type] }
   
   #I don't use counter_cache here because it can't handle votes of different types; instead, I write my own functionality for that below
   belongs_to :voteable, polymorphic: true, touch: true
