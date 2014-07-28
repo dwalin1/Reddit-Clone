@@ -102,11 +102,6 @@ span.activeVote.downvote {
 	color: #F01439;
 }
 
-img.postImg {
-	width: 100%;
-	height: 100%;
-}
-
 div.bottomSpace {
 	margin-bottom: 20px;
 }
@@ -128,4 +123,9 @@ div.commentElementDiv {
 
 div.commentButtons {
 	margin-left: 20px;
+}
+
+div.comment {
+	overflow: auto;
+	text-overflow: ellipsis;
 }

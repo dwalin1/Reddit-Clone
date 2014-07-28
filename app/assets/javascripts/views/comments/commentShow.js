@@ -7,7 +7,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	
 	tagName: "li",
 	
-	className: "container container-fluid",
+	// className: "container container-fluid",
 		
 	initialize: function(options) {
 		this.parent = options.parent;
