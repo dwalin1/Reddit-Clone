@@ -4,6 +4,9 @@ class Api::PostsController < ApplicationController
   
   def index
     @posts = Post.includes(:sub, :submitter, :votes).order(upvotes: :desc)
+    .page(params[:page]).per(5)
+    @page = params[:page]
+    @total_pages = @posts.total_pages
   end
   
   def new

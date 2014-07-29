@@ -3,7 +3,11 @@ App.Collections.Posts = Backbone.Collection.extend({
 	
 	model: App.Models.Post,
 	
-	//may not want a getOrFetch here, because we may not want to 		maintain a collection of all posts (that would be a shit ton)
+	parse: function(response) {
+		this.page = parseInt(response.page);
+		this.total_pages = parseInt(response.total_pages);
+		return response.posts;
+	}
 });
 
 App.posts = new App.Collections.Posts();
