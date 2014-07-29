@@ -29,13 +29,16 @@ App.Views.basePostShow = Backbone.View.extend({
 	
 	hasImg: function() {
 		var url = this.model.get("url");
-		if (url.slice(url.length-4) === ".jpg") {
-			if (url.slice(9, 14) === "imgur") {
-				var smallUrl = url.slice(0, url.length-4);
-				smallUrl = smallUrl + "s.jpg";
-				return smallUrl;
+		var smallUrl = url;
+		if ((url.slice(9, 14) === "imgur") || (url.slice(7, 12) === "imgur")) {
+			if (url.slice(url.length-4) === ".jpg") {
+				smallUrl = url.slice(0, url.length-4);
+			} 
+			if (!(url.slice(8, 9) === "i.")) {
+				smallUrl = smallUrl.slice(0, 7) + "i." + smallUrl.slice(7);
 			}
-			return url;
+			smallUrl = smallUrl + "s.jpg";
+			return smallUrl;
 		} else {
 			return false;
 		}
