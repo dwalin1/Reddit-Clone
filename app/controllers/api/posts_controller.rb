@@ -3,9 +3,19 @@ class Api::PostsController < ApplicationController
   before_action :must_be_poster, only: [:edit, :update, :destroy]
   
   def index
-    @posts = Post.includes(:sub, :submitter, :votes).order(upvotes: :desc)
-    .page(params[:page]).per(5)
+    pages_per = 5
     @page = params[:page]
+    
+    if params[:sub_id]
+      @posts = Post.where(sub_id: params[:sub_id])
+      .includes(:sub, :submitter, :votes)
+      .order(upvotes: :desc)
+      .page(@page).per(pages_per)
+    else
+      @posts = Post.includes(:sub, :submitter, :votes).order(upvotes: :desc)
+      .page(@page).per(pages_per)
+    end
+    
     @total_pages = @posts.total_pages
   end
   

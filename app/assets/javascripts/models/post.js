@@ -32,6 +32,8 @@ App.Models.Post = Backbone.Model.extend({
 			delete response.top_level_comments;
 		}
 		
+		console.log(response);
+		
 		return response
 	}
 });

@@ -10,6 +10,23 @@
 
 <%= render 'shared/header' %>
 <br>
+<button class="btn btn-primary" data-toggle="modal" data-target="#signInModal">
+	Modal
+</button>
+<div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+		modal
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= yield %>
 

@@ -7,7 +7,10 @@ class Api::SubsController < ApplicationController
   end
   
   def show
-    @sub = Sub.includes(posts: [:submitter, :votes], moderator: [:username, :id]).find(params[:id])
+    @page = params[:page]
+    @sub = Sub.includes(:moderator).find(params[:id])
+    @sub_posts = @sub.posts.includes(:submitter, :votes).page(@page).per(2)
+    @total_pages = @sub_posts.total_pages
   end
   
   def new

@@ -33,10 +33,13 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	},
 	
 	subShow: function(id) {
-		var sub = new App.Models.Sub({ id: id });
-		sub.fetch();		
+		var sub = App.subs.getOrFetch(id);
+		sub.fetch({
+			data: { page: 1, remove: false }
+		});		
 		var view = new App.Views.subShow({
-			model: sub
+			model: sub,
+			collection: sub.posts()
 		});
 		this._swapView(view);
 	},

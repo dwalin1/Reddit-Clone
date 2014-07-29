@@ -1,7 +1,10 @@
 App.Views.subShow = Backbone.CompositeView.extend({
 	template: JST["subs/subShow"],
 	
-	initialize: function() {		
+	initialize: function() {
+		var that = this;	
+		this.postEl = "div.posts-list";
+				
 		var newPostView = new App.Views.postForm({
 			model: new App.Models.Post({
 				sub_id: this.model.id	
@@ -10,12 +13,11 @@ App.Views.subShow = Backbone.CompositeView.extend({
 		
 		this.addSubview("div.postPost", newPostView);
 		
-		this.listenToOnce(this.model, "sync", function() {
-			this.model.posts().each(this.addPost.bind(this));
-		});
+		this.collection.each(this.addPost.bind(this));
 		
 		this.listenTo(this.model, "sync", this.render);
-		this.listenTo(this.model.posts(), "sync", this.render);		
+		this.listenTo(this.collection, "sync", this.render);		
+		this.listenTo(this.collection, "add", this.addPost.bind(this));
 	},
 	
 	events: {
@@ -29,6 +31,7 @@ App.Views.subShow = Backbone.CompositeView.extend({
 		this.$el.html(renderedContent);
 		
 		this.attachSubviews();
+		this.listenForScroll();
 		return this;
 	},
 	
@@ -37,10 +40,11 @@ App.Views.subShow = Backbone.CompositeView.extend({
 		App.router.navigate("#", { trigger: true });
 	},
 	
-	addPost: function(post, index) {
-		this.addSubview("div.posts-list", new App.Views.basePostShow({
-			model: post,
-			index: index
+	addPost: function(post) {
+		console.log("Add post:");
+		console.log(post);
+		this.addSubview(this.postEl, new App.Views.basePostShow({
+			model: post
 		}));
 	}
 });
