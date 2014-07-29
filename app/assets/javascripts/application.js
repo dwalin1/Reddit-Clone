@@ -17,6 +17,7 @@
 //= require backbone
 //= require backbone_trigger_logger
 //= require marked
+//= require bootstrap
 //= require_tree ./utils
 //= require reddit
 //= require_tree ./models

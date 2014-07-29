@@ -25,7 +25,7 @@ App.Views.commentForm = Backbone.View.extend({
 		event.preventDefault();
 		event.stopPropagation();
 		console.log("Parent's commentEl: " + this.parent.commentEl);
-		this.parent.removeSubview(this.parent.commentEl, this);
+		this.parent.removeSubview("ul.replyForm#reply-form-" + this.parent.model.id, this);
 		this.parent.showingReplyForm = false;
 	},
 	
@@ -42,7 +42,7 @@ App.Views.commentForm = Backbone.View.extend({
 				model.set({ post: that.parent.model.get("post") });
 				model.set({ submitter: user });
 				that.parent.model.comments().add(model);
-				that.parent.removeSubview(that.parent.commentEl, that);
+				that.parent.removeSubview("ul.replyForm#reply-form-" + that.parent.model.id, that);
 				that.parent.showingReplyForm = false;
 				console.log("Success!");
 			},

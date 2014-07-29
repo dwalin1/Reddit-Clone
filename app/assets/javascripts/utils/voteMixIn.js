@@ -16,9 +16,10 @@ window.voteMixIn = {
 			alert("You have to log in for that.");
 			return;
 		}
+		
 		var newVoteType = $(event.target).hasClass("upvote") ? "up" : "down";
 		var oldVoteType = this.vote().get("vote_type");
-		
+				
 		if (oldVoteType === newVoteType) {
 			this.deleteVote(oldVoteType);
 		} else {
