@@ -16,7 +16,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	
 	frontPage: function() {
 		App.posts.fetch({
-			data: { page: 1 }
+			data: { page: 1, remove: false }
 		});
 		var view = new App.Views.postsIndex({
 			collection: App.posts

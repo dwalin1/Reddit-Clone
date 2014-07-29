@@ -1,10 +1,14 @@
 App.Views.postsIndex = Backbone.CompositeView.extend({
 	template: JST["posts/postsIndex"],
 	
-	initialize: function() {		
+	initialize: function() {	
+		var that = this;	
 		this.postEl = "div.posts";
 		this.listenTo(this.collection, "sync", this.render);
-		this.listenTo(this.collection, "add", this.addPost);
+		
+		this.listenTo(this.collection, "add", this.addPost.bind(this));
+		
+		this.collection.each(this.addPost.bind(this));
 	},
 	
 	events: {
@@ -20,7 +24,7 @@ App.Views.postsIndex = Backbone.CompositeView.extend({
 		return this;
 	},
 	
-	addPost: function(post) {
+	addPost: function(post) {		
 		this.addSubview(this.postEl, new App.Views.basePostShow({
 			model: post,
 			index: false
