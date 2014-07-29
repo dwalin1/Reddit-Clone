@@ -9,7 +9,7 @@
 end
 
 #add subs
-subs = %w("Earthporn trees funny wtf gifs photos jokes programming askreddit iama todayilearned aww eli5)
+subs = %w(Earthporn trees funny wtf gifs photos jokes programming askreddit iama todayilearned aww eli5)
 subs.each do |sub|
   Sub.create!(
     title: "r/#{sub}",

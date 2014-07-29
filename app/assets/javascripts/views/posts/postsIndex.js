@@ -24,8 +24,7 @@ App.Views.postsIndex = Backbone.CompositeView.extend({
 	
 	addPost: function(post) {		
 		this.addSubview(this.postEl, new App.Views.basePostShow({
-			model: post,
-			index: false
+			model: post
 		}));
 	}
 });

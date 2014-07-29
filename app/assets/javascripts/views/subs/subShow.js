@@ -12,12 +12,11 @@ App.Views.subShow = Backbone.CompositeView.extend({
 		});
 		
 		this.addSubview("div.postPost", newPostView);
-		
 		this.collection.each(this.addPost.bind(this));
 		
 		this.listenTo(this.model, "sync", this.render);
-		this.listenTo(this.collection, "sync", this.render);		
-		this.listenTo(this.collection, "add", this.addPost.bind(this));
+		this.listenTo(this.collection, "sync", this.render);
+		this.listenTo(this.collection, "add", this.addPost.bind(this));		
 	},
 	
 	events: {
@@ -29,7 +28,6 @@ App.Views.subShow = Backbone.CompositeView.extend({
 			sub: this.model,
 		});
 		this.$el.html(renderedContent);
-		
 		this.attachSubviews();
 		this.listenForScroll();
 		return this;

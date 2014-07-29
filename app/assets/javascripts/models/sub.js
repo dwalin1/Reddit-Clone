@@ -10,7 +10,7 @@ App.Models.Sub = Backbone.Model.extend({
 	parse: function(response) {
 		if (response.posts) {
 			console.log("Setting posts");
-			this.posts().set(response.posts, { parse: true });
+			this.posts().set(response.posts, {});
 			
 			console.log("Response.posts: ");
 			console.log(response.posts);
@@ -19,7 +19,7 @@ App.Models.Sub = Backbone.Model.extend({
 			delete response.posts;
 		}
 		
-		this.posts().page = parseInt(response.page);
+		this.posts().page = this.posts().page || parseInt(response.page);
 		this.posts().total_pages = parseInt(response.total_pages);
 		delete response.page;
 		delete response.total_pages;
