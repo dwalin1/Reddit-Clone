@@ -21,7 +21,7 @@
 		</button>
 		</div>
 		
-		<div class="modal-body">
+		<div class="modal-body myModal">
 			<h1>Log In</h1>
 			<form action="<%= session_url %>" method="post">
 				<input type="hidden" name="authenticity_token" 
@@ -40,7 +40,8 @@
 		</div>
 		
 		<div class="modal-footer">
-			<h5>I don't need to login; I'm Batman! (Demo)</h5>
+			I don't need to log in. 
+				<a href = "im_batman"><div class="imbatman">I'm Batman! (Demo)</div></a>
 		</div>
     </div>
   </div>
@@ -73,12 +74,15 @@
 				<input type="submit" class="btn btn-primary" value="Sign up">
 			</form>
 		</div>
-		<div class="modal footer"></div>
+		
+		<div class="modal-footer">
+			I don't need to sign up. 
+				<a href = "im_batman"><div class="imbatman">I'm Batman! (Demo)</div></a>
+		</div>
 		
     </div>
   </div>
 </div>
-
 
 
 <%= yield %>

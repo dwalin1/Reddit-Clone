@@ -141,3 +141,21 @@ textarea.reply {
 	margin-right: auto;
 	text-align: center;
 }
+
+div.imbatman {
+	color: #C1AC1E;
+	font-family: Helvetica;
+	font-size: 25px;
+	background-color: #000;
+	transition: all 1s ease;
+	padding: 10px;
+	display: inline-block;
+	border-radius: 10px;
+	margin-left: 100px;
+}
+
+div.imbatman:hover {
+	transform: rotate(-0.02turn);
+	background-color: #C1AC1E;
+	color: #000;
+}

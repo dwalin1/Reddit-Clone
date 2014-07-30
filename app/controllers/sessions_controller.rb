@@ -24,4 +24,9 @@ class SessionsController < ApplicationController
     redirect_to root_url, notice: "Logged out!"
   end
   
+  def im_batman
+    @batman = User.find_by_username("Batman") || User.create!(username: "Batman", password: "password")
+    login!(@batman)
+    redirect_to root_url
+  end
 end
