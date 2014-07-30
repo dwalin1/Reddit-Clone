@@ -1,6 +1,8 @@
 App.Views.postShow = Backbone.CompositeView.extend({
 	template: JST["posts/postShow"],
 	
+	className: "container container-fluid",
+	
 	initialize: function() {
 		var view = this;
 		this.commentEl = "ul.post-comments";
@@ -56,14 +58,13 @@ App.Views.postShow = Backbone.CompositeView.extend({
 		var that = this;
 		comment.save({}, {
 			success: function(model, response) {
-				console.log("Success!");
 				model.set({ post: that.model });
 				model.set({ submitter: user })
 				that.model.top_level_comments().add(model);
 			},
 			
 			error: function(model, response) {
-				console.log("Error!");
+				that.$el.prepend(response.responseJSON.msg);
 			}
 		})
 	}

@@ -65,7 +65,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 			},
 			
 			error: function(model, response, options) {
-				console.log("Comment could not be deleted!");
+				that.$el.prepend(response.responseJSON.msg);
 			}
 		});
 	},
@@ -90,7 +90,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 			},
 
 			error: function(model, response, options) {
-				console.log("Comment could not be updated.");
+				that.$el.prepend(response.responseJSON.msg);
 			}
 		});
 	},

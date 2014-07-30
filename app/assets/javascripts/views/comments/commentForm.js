@@ -47,7 +47,7 @@ App.Views.commentForm = Backbone.View.extend({
 				console.log("Success!");
 			},
 			error: function(model, response, thing3) {
-				that.$el.html(response.responseJSON.msg);
+				that.$el.prepend(response.responseJSON.msg);
 			}
 		})
 	}

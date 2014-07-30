@@ -26,11 +26,11 @@ App.Views.subForm = Backbone.View.extend({
 		this.model.save(formData, {
 			success: function(model, response) {
 				App.subs.add(model);
-				App.router.navigate("#", { trigger: true });
+				App.router.navigate("#subs/" + that.model.id, { trigger: true });
 				console.log("Success!");
 			},
 			error: function(model, response, thing3) {
-				that.$el.html(response.responseJSON.msg);
+				that.$el.prepend(response.responseJSON.msg);
 			}
 		})
 	}

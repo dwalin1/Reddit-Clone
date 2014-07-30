@@ -13,7 +13,7 @@
 #
 
 class Comment < ActiveRecord::Base
-  validates :content, :submitter_id, :post_id, null: false
+  validates :content, :submitter_id, :post_id, presence: true
   
   belongs_to(
     :submitter,

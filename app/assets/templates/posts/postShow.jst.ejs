@@ -19,6 +19,7 @@
 <% if (user_id) { %>
 <div class="top-level-comment-form row bottomSpace">
 	<form class="commentForm">
+		<div class="form-group">
 		<textarea 
 			placeholder="Comment here"
 			class="form-control"
@@ -26,11 +27,12 @@
 			name="comment[content]"></textarea>
 		<input type="submit" value="Comment" 
 			class="btn btn-link linkButton pull-right">
+		</div>
 	</form>
 </div>
 <% } else { %>
 <h5 class="row">Log in to comment or vote.</h5>
 <% } %>
 
-<ul class="row post-comments">
+<ul class="post-comments">
 </ul>

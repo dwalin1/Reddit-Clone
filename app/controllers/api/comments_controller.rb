@@ -23,7 +23,7 @@ class Api::CommentsController < ApplicationController
     if @comment.save
       render "show"
     else
-      render json: {msg: "Comment could not be created."}, status: 422
+      render json: {msg: @comment.errors.full_messages}, status: 422
     end
   end
   
@@ -33,7 +33,7 @@ class Api::CommentsController < ApplicationController
     if @comment.update_attributes(comment_params)
       render "show"
     else
-      render json: {msg: "Comment could not be updated."}, status: 422
+      render json: {msg: @comment.errors.full_messages}, status: 422
     end
   end
   

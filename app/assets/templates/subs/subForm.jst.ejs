@@ -1,14 +1,16 @@
 <h1><%= formText %></h1>
-<form id="subForm">
-	<label>Title
-		<input type="text" name="sub[title]" 
-		value="<%= sub.escape("title") %>">
-	</label>
+<form id="subForm" role="form">
+	<div class="form-group">
+		<label for="title">Title</label>
+		<input type="text" name="sub[title]" id="title" class="form-control"
+			value="<%= sub.escape("title") %>">
+	</div>
 	
-	<label>Description
-		<input type="text" name="sub[description]" 
-		value="<%= sub.escape("description") %>">
-	</label>
+	<div class="form-group">
+		<label for="text">Description</label>
+		<input type="text" name="sub[description]" class="form-control"
+			value="<%= sub.escape("description") %>">
+	</div>
 	
-	<input type="submit" value="<%= formText %>">
+	<input type="submit" value="<%= formText %>" class="btn btn-primary">
 </form>

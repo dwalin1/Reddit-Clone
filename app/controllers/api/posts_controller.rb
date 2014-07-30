@@ -35,7 +35,7 @@ class Api::PostsController < ApplicationController
     if @post.save
       render json: @post
     else
-      render json: {msg: "Post could not be created."}, status: 422
+      render json: {msg: @post.errors.full_messages}, status: 422
     end
   end
   
@@ -44,7 +44,7 @@ class Api::PostsController < ApplicationController
     if @post.update_attributes(post_params)
       render json: @post
     else
-      render json: {msg: "Post could not be updated."}, status: 422
+      render json: {msg: @post.errors.full_messages}, status: 422
     end
   end
   
