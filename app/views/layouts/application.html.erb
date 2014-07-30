@@ -35,8 +35,12 @@
 					<input type="password" name="user[password]">
 				</label>
 	
-				<input type="submit" value="Log in">
+				<input type="submit" class="btn btn-primary" value="Log in">
 			</form>
+		</div>
+		
+		<div class="modal-footer">
+			<h5>I don't need to login; I'm Batman! (Demo)</h5>
 		</div>
     </div>
   </div>
@@ -66,40 +70,11 @@
 					<input type="password" name="user[password]">
 				</label>
 	
-				<input type="submit" value="Log in">
+				<input type="submit" class="btn btn-primary" value="Sign up">
 			</form>
 		</div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="createSub" tabindex="-1" role="dialog" aria-labelledby="create sub" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">	
-		<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">
-			<span aria-hidden="true">&times;</span>
-			<span class="sr-only">Close</span>
-		</button>
-		</div>
+		<div class="modal footer"></div>
 		
-		<div class="modal-body">
-			<h1>Sign Up</h1>
-			<form action="<%= users_url %>" method="post">
-				<input type="hidden" name="authenticity_token" 
-				value="<%= form_authenticity_token %>">
-				
-				<label>Username
-					<input type="text" name="user[username]">
-				</label>
-	
-				<label>Password
-					<input type="password" name="user[password]">
-				</label>
-	
-				<input type="submit" value="Log in">
-			</form>
-		</div>
     </div>
   </div>
 </div>

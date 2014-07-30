@@ -13,7 +13,7 @@ window.voteMixIn = {
 		event.stopPropagation();
 		
 		if (!user_id) {
-			alert("You have to log in for that.");
+			$('#login').modal();
 			return;
 		}
 		
