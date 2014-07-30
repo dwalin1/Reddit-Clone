@@ -3,7 +3,7 @@ class Api::PostsController < ApplicationController
   before_action :must_be_poster, only: [:edit, :update, :destroy]
   
   def index
-    pages_per = 5
+    pages_per = 10
     @page = params[:page]
     
     if params[:sub_id]
@@ -35,7 +35,7 @@ class Api::PostsController < ApplicationController
     if @post.save
       render json: @post
     else
-      render json: {msg: @post.errors.full_messages}, status: 422
+      render json: @post.errors.full_messages, status: 422
     end
   end
   
@@ -44,7 +44,7 @@ class Api::PostsController < ApplicationController
     if @post.update_attributes(post_params)
       render json: @post
     else
-      render json: {msg: @post.errors.full_messages}, status: 422
+      render json: @post.errors.full_messages, status: 422
     end
   end
   

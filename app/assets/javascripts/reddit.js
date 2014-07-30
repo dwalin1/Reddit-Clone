@@ -19,3 +19,7 @@ window.App = {
 		Backbone.history.start();
 	}
 };
+
+App.error_style = function(errors) {
+	return "<div class='alert alert-danger'>" + errors.join(" ") + "</div>";	
+};

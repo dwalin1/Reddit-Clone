@@ -9,7 +9,7 @@ class Api::SubsController < ApplicationController
   def show
     @page = params[:page]
     @sub = Sub.includes(:moderator).find(params[:id])
-    @sub_posts = @sub.posts.includes(:submitter, :votes).page(@page).per(2)
+    @sub_posts = @sub.posts.includes(:submitter, :votes).page(@page).per(10)
     @total_pages = @sub_posts.total_pages
   end
   
@@ -26,7 +26,7 @@ class Api::SubsController < ApplicationController
     if @sub.save
       render json: @sub
     else
-      render json: {msg: @sub.errors.full_messages}, status: 422
+      render json: @sub.errors.full_messages, status: 422
     end
   end
   
@@ -35,7 +35,7 @@ class Api::SubsController < ApplicationController
     if @sub.update_attributes(sub_params)
       render json: @sub
     else
-      render json: {msg: @sub.errors.full_messages}, status: 422
+      render json: @sub.errors.full_messages, status: 422
     end
   end
   

@@ -3,6 +3,7 @@ App.Views.postForm = Backbone.View.extend({
 	
 	initialize: function() {
 		this.formText = (this.model.isNew()) ? "Create Post" : "Update Post";
+		this.msgDiv = "div.postMessages";
 		this.listenTo(this.model, "sync", this.render);		
 	},
 	
@@ -29,7 +30,7 @@ App.Views.postForm = Backbone.View.extend({
 				console.log("Success!");
 			},
 			error: function(model, response, thing3) {
-				that.$el.prepend(response.responseJSON.msg);
+				$(that.msgDiv).html(App.error_style(response.responseJSON));
 			}
 		})
 	}

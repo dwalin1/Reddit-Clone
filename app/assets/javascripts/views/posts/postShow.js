@@ -6,6 +6,7 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	initialize: function() {
 		var view = this;
 		this.commentEl = "ul.post-comments";
+		this.msgDiv = "div.top-level-comment-messages";
 		this.listenToOnce(this.model, "sync", function() {
 			this.addSubview("div.post-container", new App.Views.basePostShow({
 				model: this.model,
@@ -51,8 +52,9 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	postComment: function(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		var formData = $(event.target).serializeJSON();
-		$(event.target).children("textarea").val("");
+		var target = $(event.target);
+		var formData = target.serializeJSON();
+		target.find("textarea").val("");
 		formData.comment.post_id = this.model.get("id");
 		var comment = new App.Models.Comment(formData);
 		var that = this;
@@ -61,10 +63,12 @@ App.Views.postShow = Backbone.CompositeView.extend({
 				model.set({ post: that.model });
 				model.set({ submitter: user })
 				that.model.top_level_comments().add(model);
+				$(that.msgDiv).html("Post created!");
+				
 			},
 			
 			error: function(model, response) {
-				that.$el.prepend(response.responseJSON.msg);
+				$(that.msgDiv).html(App.error_style(response.responseJSON));
 			}
 		})
 	}

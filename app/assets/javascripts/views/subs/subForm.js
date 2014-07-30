@@ -3,7 +3,8 @@ App.Views.subForm = Backbone.View.extend({
 	
 	initialize: function() {
 		this.formText = (this.model.isNew()) ? "Create Sub" : "Update Sub";
-		this.listenTo(this.model, "sync", this.render);		
+		this.listenTo(this.model, "sync", this.render);
+		this.msgDiv = "div.subMessages";		
 	},
 	
 	events: {
@@ -30,7 +31,7 @@ App.Views.subForm = Backbone.View.extend({
 				console.log("Success!");
 			},
 			error: function(model, response, thing3) {
-				that.$el.prepend(response.responseJSON.msg);
+				$(that.msgDiv).html(App.error_style(response.responseJSON));
 			}
 		})
 	}
