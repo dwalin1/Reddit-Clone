@@ -11,16 +11,100 @@
 <%= render 'shared/header' %>
 <br>
 
-<!-- Small modal -->
-<button class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
-
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">	
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">
+			<span aria-hidden="true">&times;</span>
+			<span class="sr-only">Close</span>
+		</button>
+		</div>
+		
+		<div class="modal-body">
+			<h1>Log In</h1>
+			<form action="<%= session_url %>" method="post">
+				<input type="hidden" name="authenticity_token" 
+				value="<%= form_authenticity_token %>">
+				
+				<label>Username
+					<input type="text" name="user[username]">
+				</label>
+	
+				<label>Password
+					<input type="password" name="user[password]">
+				</label>
+	
+				<input type="submit" value="Log in">
+			</form>
+		</div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="signup" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">	
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">
+			<span aria-hidden="true">&times;</span>
+			<span class="sr-only">Close</span>
+		</button>
+		</div>
+		
+		<div class="modal-body">
+			<h1>Sign Up</h1>
+			<form action="<%= users_url %>" method="post">
+				<input type="hidden" name="authenticity_token" 
+				value="<%= form_authenticity_token %>">
+				
+				<label>Username
+					<input type="text" name="user[username]">
+				</label>
+	
+				<label>Password
+					<input type="password" name="user[password]">
+				</label>
+	
+				<input type="submit" value="Log in">
+			</form>
+		</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createSub" tabindex="-1" role="dialog" aria-labelledby="create sub" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">	
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">
+			<span aria-hidden="true">&times;</span>
+			<span class="sr-only">Close</span>
+		</button>
+		</div>
+		
+		<div class="modal-body">
+			<h1>Sign Up</h1>
+			<form action="<%= users_url %>" method="post">
+				<input type="hidden" name="authenticity_token" 
+				value="<%= form_authenticity_token %>">
+				
+				<label>Username
+					<input type="text" name="user[username]">
+				</label>
+	
+				<label>Password
+					<input type="password" name="user[password]">
+				</label>
+	
+				<input type="submit" value="Log in">
+			</form>
+		</div>
+    </div>
+  </div>
+</div>
+
+
 
 <%= yield %>
 
