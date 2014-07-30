@@ -1,5 +1,5 @@
-#5 users
-5.times do
+#20 users
+20.times do
   ActiveRecord::Base.transaction do
     u = User.create!(
       username: Faker::Internet.user_name,
@@ -46,33 +46,30 @@ User.all.each do |user|
   end
 end
 
-#create a large comment structure on one post
-post = Post.all.sample
-
-#5 top level posts
-users = User.all.shuffle
-users.each do |user|
-  Comment.create!(
-  content: Faker::Lorem.sentence,
-  submitter_id: user.id,
-  post_id: post.id,
-  parent_comment_id: nil
-  )
-end
-
-# 1: 5 * 5 = 25 comments
-1.times do
-  users = User.all.shuffle
-  comments = post.comments.clone
-
-  users.each do |user|
-    comments.each do |comment|
-      Comment.create!(
-      content: Faker::Lorem.sentence,
-      submitter_id: user.id,
-      post_id: post.id,
-      parent_comment_id: comment.id
-      )
+#create some comments on all posts
+Post.all.each do |post|
+  3.times do
+    c = Comment.create!(
+    content: Faker::Lorem.sentence,
+    submitter_id: User.all.sample.id,
+    post_id: post.id,
+    parent_comment_id: nil
+    )
+    
+    r = rand(10)
+    
+    if r < 5
+      r.times do
+        c = Comment.create!(
+        content: Faker::Lorem.sentence,
+        submitter_id: User.all.sample.id,
+        post_id: post.id,
+        parent_comment_id: c.id
+        )
+      end
     end
   end
 end
+
+#create a large comment structure on one post
+# post = Post.all.sample
