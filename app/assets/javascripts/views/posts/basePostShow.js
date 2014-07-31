@@ -31,13 +31,15 @@ App.Views.basePostShow = Backbone.View.extend({
 		var url = this.model.get("url");
 		var smallUrl = url;
 		if ((url.slice(9, 14) === "imgur") || (url.slice(7, 12) === "imgur")) {
-			if (url.slice(url.length-4) === ".jpg") {
+			var url_length = url.length
+			if (url.slice(url_length-4, url_length-3) === ".") {
+				var extension = url.slice(url_length-4);
 				smallUrl = url.slice(0, url.length-4);
 			} 
-			if (!(url.slice(8, 9) === "i.")) {
+			if (!(url.slice(7, 9) === "i.")) {
 				smallUrl = smallUrl.slice(0, 7) + "i." + smallUrl.slice(7);
 			}
-			smallUrl = smallUrl + "m.jpg";
+			smallUrl = smallUrl + "m" + (extension || ".jpg");
 			return smallUrl;
 		} else {
 			return false;
