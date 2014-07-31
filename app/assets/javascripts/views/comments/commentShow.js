@@ -98,6 +98,12 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	showReplyForm: function(event) {
 		event.preventDefault();
 		event.stopPropagation();
+		
+		if (!user_id) {
+			$('#login').modal();
+			return;
+		}
+		
 		if (this.showingReplyForm) return;
 		this.showingReplyForm = true;
 		var that = this;
