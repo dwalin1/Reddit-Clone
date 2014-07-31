@@ -37,7 +37,7 @@ App.Views.basePostShow = Backbone.View.extend({
 			if (!(url.slice(8, 9) === "i.")) {
 				smallUrl = smallUrl.slice(0, 7) + "i." + smallUrl.slice(7);
 			}
-			smallUrl = smallUrl + "s.jpg";
+			smallUrl = smallUrl + "m.jpg";
 			return smallUrl;
 		} else {
 			return false;

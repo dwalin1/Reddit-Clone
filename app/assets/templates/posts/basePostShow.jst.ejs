@@ -1,7 +1,7 @@
 <div class="col-xs-1">
 	<div class="centered">
 		<a class="">
-			<span class="upvote glyphicon glyphicon-chevron-up
+			<span class="upvote bigger glyphicon glyphicon-chevron-up
 				<% if (activeVote === "up") { %>
 					activeVote
 				<% } %>
@@ -10,11 +10,11 @@
 		</a>
 			
 		<div class="row">
-			<%= post.get("upvotes") %>
+			<span class="bigger"><%= post.get("upvotes") %></span>
 		</div>
 	
 		<a class="">
-			<span class="downvote 
+			<span class="downvote bigger 
 			glyphicon glyphicon-chevron-down
 			<% if (activeVote === "down") { %>
 				activeVote
@@ -40,7 +40,7 @@
 	<div class="postRow1 row">
 		<div class="title col-xs-12">	
 			<a href="<%= post.escape('url') || 
-			"#posts/" + post.id %>">
+			"#posts/" + post.id %>" class="bigger"">
 				<%= post.escape("title") %>
 			</a>
 		</div>
@@ -64,7 +64,7 @@ to
 	
 	<div class="postRow3 row">
 		<div class="commentsLink cols-xs-12">
-			<a href="#posts/<%= post.id %>">
+			<a href="#posts/<%= post.id %>" class="big">
 				<%= post.get("comments_count") %> comments
 			</a>
 		</div>
