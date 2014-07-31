@@ -25,8 +25,7 @@ class SessionsController < ApplicationController
   end
   
   def im_batman
-    batman_counter = User.where("username LIKE 'Batman%'").length
-    @batman = User.create!(username: "Batman#{batman_counter}", password: "password")
+    @batman = User.create_batman!
     login!(@batman)
     redirect_to root_url
   end

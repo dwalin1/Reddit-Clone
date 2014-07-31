@@ -52,6 +52,16 @@ class User < ActiveRecord::Base
     user.try { user.is_password?(password) ? user : nil }
   end
   
+  def self.batmen
+    @batmen ||= User.where("username LIKE 'Batman%'").length
+  end
+  
+  def self.create_batman!
+    batmen = self.batmen
+    @batmen += 1
+    User.create!(username: "Batman#{batmen}", password: "password")
+  end
+  
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
   end
