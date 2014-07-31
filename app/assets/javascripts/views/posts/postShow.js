@@ -44,9 +44,9 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	
 	deletePost: function(event) {
 		event.preventDefault();
-		var sub_id = this.model.get("sub_id");
+		var sub_url = this.model.get("sub_url");
 		this.model.destroy();
-		App.router.navigate("#subs/" + sub_id, { trigger: true });
+		App.router.navigate(sub_url, { trigger: true });
 	},
 	
 	postComment: function(event) {
