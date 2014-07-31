@@ -15,7 +15,9 @@ a:hover {
 
 body {
 	padding-top: 60px;
-	background-color: #6F8E99;
+	background-color: #B96422
+	// #BC7039;
+	//	#6F8E99;
 }
 
 .post {
@@ -50,7 +52,7 @@ li {
 }
 
 span.activeVote.upvote {
-	color: #FBF906;
+	color: #36B41C;
 }
 
 span.activeVote.downvote {
@@ -121,4 +123,8 @@ div.imbatman:hover {
 
 .big {
 	font-size: 16px;
+}
+
+.rounded {
+	border-radius: 10px;
 }
