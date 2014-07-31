@@ -17,7 +17,8 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	
 	frontPage: function() {
 		App.posts.fetch({
-			data: { page: 1, remove: false }
+			data: { page: 1 },
+			remove: false
 		});
 		var view = new App.Views.postsIndex({
 			collection: App.posts
@@ -36,7 +37,8 @@ App.Routers.AppRouter = Backbone.Router.extend({
 	subShow: function(id) {
 		var sub = App.subs.getOrFetch(id);
 		sub.fetch({
-			data: { page: 1, remove: false}
+			data: { page: 1},
+			remove: false
 		});		
 		var view = new App.Views.subShow({
 			model: sub,
