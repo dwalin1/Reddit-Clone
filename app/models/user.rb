@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   
   has_many(
     :posts,
+    -> { order('upvotes DESC') },  
     foreign_key:  :submitter_id,
     primary_key:  :id,
     class_name:   "Post"
@@ -32,6 +33,7 @@ class User < ActiveRecord::Base
   
   has_many(
     :comments,
+    -> { order('upvotes DESC') },  
     foreign_key:  :submitter_id,
     primary_key:  :id,
     class_name:   "Comment"

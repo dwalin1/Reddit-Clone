@@ -9,13 +9,7 @@ App.Models.Sub = Backbone.Model.extend({
 
 	parse: function(response) {
 		if (response.posts) {
-			console.log("Setting posts");
 			this.posts().set(response.posts, {});
-			
-			console.log("Response.posts: ");
-			console.log(response.posts);
-			console.log("Posts()");
-			console.log(this.posts());
 			delete response.posts;
 		}
 		

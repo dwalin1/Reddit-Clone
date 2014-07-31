@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "static_pages#root"
-  resources :users
+  resources :users, only: [:create]
   resource :session
   
   namespace :api, defaults: { format: :json } do
@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     
     resources :votes, only: [:create, :destroy, :update]
     
+    resources :users, only: [:show]
     # get "nested_comments/:parent_id/", to: "comments#comment_index"
   end
   

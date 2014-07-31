@@ -8,6 +8,7 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		"posts/:sub/new": "postNew",
 		"posts/:id/edit": "postEdit",
 		"posts/:id": "postShow",
+		"users/:id": "userShow"
 	},
 	
 	initialize: function(options) {
@@ -86,6 +87,15 @@ App.Routers.AppRouter = Backbone.Router.extend({
 		var post = new App.Models.Post({id: id});
 		post.fetch();
 		this.postForm(post);
+	},
+	
+	userShow: function(id) {
+		var user = new App.Models.User({id: id});
+		user.fetch();
+		var view = new App.Views.userShow({
+			model: user
+		});
+		this._swapView(view);
 	},
 	
 	_swapView: function(view) {

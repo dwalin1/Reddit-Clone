@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :must_be_logged_in, except: [:new, :create]
+  before_action :must_be_logged_in, except: [:new, :create, :show]
   before_action :must_be_same_user, only: [:update, :edit]
   
   def new
@@ -29,10 +29,6 @@ class UsersController < ApplicationController
       flash.now[:errors] = @user.errors.full_messages
       render 'edit'
     end
-  end
-  
-  def show
-    @user = User.find(params[:id])
   end
   
   private
