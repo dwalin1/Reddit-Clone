@@ -5,6 +5,8 @@ App.Views.postsIndex = Backbone.CompositeView.extend({
 		var that = this;	
 		this.postEl = "div.posts";
 		this.collection.each(this.addPost.bind(this));
+		
+		
 		this.listenTo(this.collection, "sync", this.render);		
 		this.listenTo(this.collection, "add", this.addPost.bind(this));
 	},

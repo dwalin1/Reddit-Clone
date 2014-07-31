@@ -16,8 +16,10 @@ App.Collections.Posts = Backbone.Collection.extend({
 	model: App.Models.Post,
 	
 	parse: function(response) {
-		this.page = parseInt(response.page);
 		this.total_pages = parseInt(response.total_pages);
+		if (!(this.page === this.total_pages)) {
+			this.page = parseInt(response.page);
+		}
 		delete response.page
 		delete response.total_pages
 		return response.posts;

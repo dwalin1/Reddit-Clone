@@ -14,7 +14,9 @@
 			</div>
 			
 			<div class="commentElementDiv">
-				<%= comment.escape("submitter") %> 
+				<a href="#users/<%= comment.get("submitter_id") %>">
+					<%= comment.escape("submitter") %>
+				</a>
 				<%= comment.get("upvotes") %> points
 				<%= comment.get("ago") %> ago
 			</div>

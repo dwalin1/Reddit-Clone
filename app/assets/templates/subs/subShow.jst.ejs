@@ -15,7 +15,9 @@
 	
 	<%= sub.escape("description") %> |
 	<u>Moderator</u>: 
-	<%= sub.escape("moderator") %> 
+	<a href="#users/<%= sub.get("moderator_id") %>">
+		<%= sub.escape("moderator") %>
+	</a>
 </div>
 
 <% if (user_id) { %>
