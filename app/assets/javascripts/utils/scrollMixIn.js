@@ -8,14 +8,14 @@ window.scrollMixIn = {
     nextPage: function () {
       var self = this;
       if ($(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-        console.log("scrolled to bottom!");
+        // console.log("scrolled to bottom!");
         if (self.collection.page < self.collection.total_pages) {
           self.collection.fetch({
             data: { page: self.collection.page + 1 },
             remove: false,
             wait: true,
             success: function () {
-              console.log("successfully fetched page " + self.collection.page);
+              // console.log("successfully fetched page " + self.collection.page);
             }
           });
         }
