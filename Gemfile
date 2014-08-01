@@ -44,6 +44,8 @@ gem 'faker'
 
 gem 'kaminari'
 
+gem 'thin'
+
 group :development do
   gem 'pry-rails'
   gem 'annotate'

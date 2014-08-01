@@ -58,7 +58,6 @@ class Api::PostsController < ApplicationController
     @post = Post.includes(:submitter).find(params[:id])
     @top_level_comments = @post.comments.where(parent_comment_id: nil).includes(:submitter, :votes)
     @comments = @post.comments.where.not(parent_comment_id: nil).includes(:submitter, :votes)
-    
   end
   
   private
