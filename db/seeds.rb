@@ -138,17 +138,31 @@ image_hashes = {
     
     {
       title: "Baby lion",
-      url: "http://i.imgur.com/icnIFpq.jpg"
+      url: "http://i.imgur.com/icnIFpq.jpg",
+      content: "Awimbaway awimbaway awimbaway..."
     },
     
     {
       title: "Hello there!",
-      url: "http://i.imgur.com/l6WCAvQ.jpg"
+      url: "http://i.imgur.com/l6WCAvQ.jpg",
+      
     },
     
     {
       title: "An afternoon at sea",
-      url: "http://i.imgur.com/YyZAoyV.jpg"
+      url: "http://i.imgur.com/YyZAoyV.jpg",
+      content: "He likes to bark on barques"
+    },
+    
+    {
+      title: "They'll cap your bara",
+      url: "http://i.imgur.com/WDAnBNl.jpg",
+      content: "It's a clever pun on the word capybara"
+    },
+    
+    {
+      title: "Oh deer",
+      url: "http://i.imgur.com/waEwoLk.jpg"
     }
   ],
    
@@ -237,6 +251,17 @@ image_hashes = {
       title: "Fido the Burninator",
       url: "http://i.imgur.com/su6yFvy.jpg",
       content: "And the Fido burns in the niiiiiight..."
+    },
+    
+    {
+      title: "I am not amused.",
+      url: "http://i.imgur.com/VwHDvRW.jpg",
+      content: "Bath time is not laugh time."
+    },
+    
+    {
+      title: "Let's go beyond herds, flocks, packs, murders, and prides",
+      url: "http://i.imgur.com/QWJp9Fy.jpg",
     }
   ],
   
@@ -275,6 +300,12 @@ image_hashes = {
       title: "All hail hypnocat",
       url: "http://imgur.com/qvvcITg",
       content: "He is our new overlord"
+    },
+    
+    {
+      title: "Human face without muscles",
+      url: "http://i.imgur.com/4hlSio8.jpg",
+      content: "What the face?"
     }
   ],
   
@@ -313,6 +344,11 @@ image_hashes = {
       title: "Dropped pasta, art ensued",
       url: "http://imgur.com/1UqDAOD",
       content: "Watch out, Picasso"
+    },
+    
+    {
+      title: "NES built into an NES cartridge",
+      url: "http://i.imgur.com/rWjyxmU.jpg"
     }
   ],
   
