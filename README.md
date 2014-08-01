@@ -1,9 +1,9 @@
 <h1>Raddit.co</h1>
 
-This is a Reddit clone I built in Backbone and Rails as my final solo project for App Academy in July 2014. I record my day to day progress on the app in my App Academy blog, starting here: <a href=""></a>.
+This is a Reddit clone I built in Backbone and Rails as my final solo project for App Academy, July 23-31 of 2014. I record my day to day progress on the app in my App Academy blog, starting <a href="http://thejaggedhedgehog.tumblr.com/post/92694725935/going-solo">here</a>.
 
 <h3>Functionality</h3>
-Mostly it works just like actual Reddit for those features of actual Reddit it supports: without logging in, users can view the top (most upvoted) posts from all subs in descending order on the front page, as well as click on the links and read the comments. To create a sub, post, or comment/reply, as well as to upvote or downvote, the user needs to log in. I have full auth with hashed passwords and session tokens, but for a demo the user can just claim to be Batman, in which case a new user of the with a username of the form "Batman123" is created for their session.
+Mostly it works just like actual Reddit for those features of actual Reddit it supports: without logging in, users can view the top (most upvoted) posts from all subs in descending order on the front page, as well as click on the links and read the comments. To create a sub, post, or comment/reply, as well as to upvote or downvote, the user needs to log in. I have full auth with hashed passwords and session tokens, but for a demo the user can just claim to be Batman, in which case a new user with a username of the form "Batman123" is created for their session.
 
 Raddit features infinite scroll for posts, loading ten at a time when the user reaches the bottom of the page until all have been loaded. Replies in the comments can nest indefinitely, though they will eventually reach the far right of the screen and become too narrow to be legible. If the URL entered for a post links to imgur, the corresponding .jpg or .gif is displayed on Raddit as a medium thumbnail, and the full version is linked to, as on Reddit. User and sub show pages both collect only the relevant posts in descending order of upvotes.
 
