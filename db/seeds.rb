@@ -9,25 +9,361 @@
 end
 
 #add subs
-subs = %w(Earthporn trees funny wtf gifs photos jokes programming askreddit iama todayilearned aww eli5)
-subs.each do |sub|
+subs = %w(gifs aww Earthporn funny wtf food mildlyinteresting)
+descriptions = [
+  "Moving pictures!",
+  "So cute! Awwww",
+  "Mother Nature is a MILF.",
+  "Things which are not especially funny.",
+  "Things which are not especially wtf.",
+  "Tastiness",
+  "Things which are mildly interesting"
+]
+
+subs.each_with_index do |sub, i|
   Sub.create!(
     title: "r/#{sub}",
-    description: Faker::Company.catch_phrase,
+    description: descriptions[i],
     moderator_id: User.all.sample.id
   )
 end
 
-#posts from images
-images = %w(http://i.imgur.com/iAaGhgL.gif http://i.imgur.com/xmhzkbg.gif http://i.imgur.com/Beknpzx.gif http://i.imgur.com/dE7wOpY.jpg http://i.imgur.com/3peQQYi.jpg http://i.imgur.com/z3quWLs.jpg http://i.imgur.com/SW2aAyV.jpg http://i.imgur.com/IAYZ20i.jpg http://i.imgur.com/T3MwFfD.jpg http://i.imgur.com/VU6qzAM.jpg http://i.imgur.com/tllKLiU.jpg http://imgur.com/V0T84Xy http://i.imgur.com/IiesWJw.jpg http://i.imgur.com/ExHKn0u.jpg http://imgur.com/01nibU3 http://i.imgur.com/Tt43eLl.jpg http://i.imgur.com/T9olOZT.jpg http://i.imgur.com/J4fj8c0.jpg http://imgur.com/RO8rwcV http://i.imgur.com/T36QfAx.jpg http://i.imgur.com/i9D54EH.jpg http://imgur.com/ZmHNOGC http://i.imgur.com/3JLzS2e.jpg http://imgur.com/ri2NcWR http://i.imgur.com/1hNd3nJ.jpg http://i.imgur.com/71GeugS.jpg http://i.imgur.com/FofH8hm.jpg http://i.imgur.com/yTu1IY5.jpg http://i.imgur.com/a0awGrL.jpg http://i.imgur.com/dYVggcy.jpg http://imgur.com/de7cPpM http://i.imgur.com/5JFgaUC.jpg http://i.imgur.com/TH0Cxyn.jpg http://i.imgur.com/6ug0pfy.jpg http://imgur.com/RPeByw9 http://i.imgur.com/yDkMrjF.jpg http://i.imgur.com/lfxfr5W.jpg http://i.imgur.com/gwnvKTF.jpg http://i.imgur.com/2kRGlHt.jpg http://imgur.com/cm5IrH2 http://i.imgur.com/BQsyhJu.jpg http://i.imgur.com/hCEQEDJ.jpg http://imgur.com/60Hz04U http://i.imgur.com/9eAivVd.jpg http://i.imgur.com/Ch4pdwM.jpg http://i.imgur.com/3TKmbiB.jpg http://i.imgur.com/karxoPj.jpg http://imgur.com/llqwUwF http://i.imgur.com/qH3byI5.jpg http://i.imgur.com/icnIFpq.jpg http://imgur.com/vvr2fpj http://i.imgur.com/9nam59T.jpg http://imgur.com/f64r09Q http://imgur.com/eV8qc8d http://i.imgur.com/l6WCAvQ.jpg http://imgur.com/qvvcITg http://i.imgur.com/6DnWazj.jpg http://i.imgur.com/YyZAoyV.jpg)
-images.each do |img, i|
-  Post.create!(
-  title: Faker::Hacker.say_something_smart,
-  url: img,
-  content: Faker::Hacker.noun,
-  sub_id: Sub.all.sample.id,
-  submitter_id: User.all.sample.id
-  )
+
+image_hashes = {
+  gifs: [
+    {
+      title: "Dog to the rescue",
+      url: "http://i.imgur.com/iAaGhgL.gif",
+      content: "Dog runs on sheep: coolness ensues."
+    },
+  
+    {
+      title: "This dog knows the muffin man",
+      url: "http://i.imgur.com/xmhzkbg.gif",
+      content: "He lives on Drury Lane."
+    },
+  
+    {
+      title: "You made this?",
+      url: "http://i.imgur.com/Beknpzx.gif",
+      content: "I made this."
+    },
+    
+    {
+      title: "Because physics",
+      url: "http://i.imgur.com/karLW5E.gif",
+      content: "Right in the forehead"
+    },
+    
+    {
+      title: "Tastes like burning!",
+      url: "http://i.imgur.com/crgL3xX.gif",
+      content: "Me fail English? That's unpossible!"
+    },
+    
+    {
+      title: "I'm grooming here!",
+      url: "http://i.imgur.com/pPgT7pT.gif",
+      content: "Can a ferret get no privacy?"
+    }
+  ],
+  
+  aww: [
+    {
+      title: "Ppppfftt",
+      url: "http://i.imgur.com/z3quWLs.jpg", 
+      content: "Kids these days."
+    },
+  
+    {
+      title: "These feet are made for grabbing",
+      url: "http://i.imgur.com/IAYZ20i.jpg",
+      content: "And that's just what I'll do"
+    },
+  
+    {
+      title: "Kitty love",
+      url: "http://i.imgur.com/dE7wOpY.jpg",
+      content: "Awwwwww"
+    },
+    
+    {
+      title: "Beagle hug",
+      url: "http://i.imgur.com/T36QfAx.jpg",
+      content: "So sweet"
+    },
+    
+    {
+      title: "Cute lil fella",
+      url: "http://imgur.com/ZmHNOGC",
+      content: "Who's a good boy?"
+    },
+    
+    {
+      title: "He can hog my hedge any day",
+      url: "http://i.imgur.com/1hNd3nJ.jpg",
+      content: "Dawwww"
+    },
+    
+    {
+      title: "Say what?",
+      url: "http://i.imgur.com/yTu1IY5.jpg",
+      content: "This cat looks surprised"
+    },
+    
+    {
+      title: "Onward, faithful steed",
+      url: "http://i.imgur.com/a0awGrL.jpg"
+    },
+    
+    {
+      title: "Only Thor and Dog-Thor can pick it up",
+      url: "http://i.imgur.com/lfxfr5W.jpg"
+    },
+    
+    {
+      title: "A puppy!",
+      url: "http://i.imgur.com/hCEQEDJ.jpg"
+    },
+    
+    {
+      title: "Such a pretty kitty",
+      url: "http://imgur.com/60Hz04U"
+    },
+    
+    {
+      title: "Dinner time!",
+      url: "http://imgur.com/llqwUwF"
+    },
+    
+    {
+      title: "Baby lion",
+      url: "http://i.imgur.com/icnIFpq.jpg"
+    },
+    
+    {
+      title: "Hello there!",
+      url: "http://i.imgur.com/l6WCAvQ.jpg"
+    },
+    
+    {
+      title: "An afternoon at sea",
+      url: "http://i.imgur.com/YyZAoyV.jpg"
+    }
+  ],
+   
+  Earthporn: [
+    {
+      title: "The night sky",
+      url: "http://i.imgur.com/tllKLiU.jpg",
+      content: "Beautiful"
+    },
+    
+    {
+      title: "I come from the land of the ice and snow...",
+      url: "http://i.imgur.com/3peQQYi.jpg",
+      content: "Hammer of the gods..."
+    },
+    
+    {
+      title: "Damn! That's some fine Earthporn.",
+      url: "http://i.imgur.com/IiesWJw.jpg",
+      content: "Ayup."
+    },
+    
+    {
+      title: "A lake or something",
+      url: "http://i.imgur.com/T9olOZT.jpg",
+      content: "Possibly a river."
+    },
+    
+    {
+      title: "It was nighttime when this photo was taken",
+      url: "http://i.imgur.com/J4fj8c0.jpg",
+      content: "True story."
+    },
+    
+    {
+      title: "Town in Colorado",
+      url: "http://i.imgur.com/yDkMrjF.jpg",
+      content: "Not sure if it is actually in Colorado, but that seems plausible"
+    },
+    
+    {
+      title: "Awesome lake",
+      url: "http://i.imgur.com/9eAivVd.jpg",
+      content: "This is what happens when water fills a hole"
+    },
+    
+    {
+      title: "Coastal bliss",
+      url: "http://i.imgur.com/3TKmbiB.jpg",
+      content: "Flowers too"
+    }
+  ],
+  
+  funny: [
+    {
+     title: "My child bought an anteater",
+     url: "http://i.imgur.com/SW2aAyV.jpg",
+     content: "Now I have no sister."
+    },
+    
+    {
+      title: "His dad is Walter White",
+      url: "http://imgur.com/ri2NcWR",
+      content: "Seriously, he looks like Walter White"
+    },
+    
+    {
+      title: "Genius indeed",
+      url: "http://imgur.com/aw4QLJu",
+      content: "It's always sunny when you have rum-soaked ham"
+    },
+    
+    {
+      title: "Would that we all could be non-bogus babes",
+      url: "http://i.imgur.com/siUb43f.jpg",
+      content: "Imagine all the people...being non-bogus babes"
+    },
+    
+    {
+      title: "A true hide and seek champion",
+      url: "http://i.imgur.com/4JpWRnl.jpg",
+      content: "No one will ever find him there"
+    },
+    
+    {
+      title: "Fido the Burninator",
+      url: "http://i.imgur.com/su6yFvy.jpg",
+      content: "And the Fido burns in the niiiiiight..."
+    }
+  ],
+  
+  wtf: [
+    {
+      title: "FEED ME",
+      url: "http://i.imgur.com/Tt43eLl.jpg",
+      content: "I AM A HUNGRY MONKEY"
+    },
+    
+    {
+      title: "Lovecraft does Sponge Bob",
+      url: "http://i.imgur.com/i9D54EH.jpg",
+      content: "He found a gateway to our dimension"
+    },
+    
+    {
+      title: "Stampy wants a peanut",
+      url: "http://i.imgur.com/FofH8hm.jpg",
+      content: "Money can be exchanged for goods and services"
+    },
+    
+    {
+      title: "My preciousssssssss",
+      url: "http://i.imgur.com/TH0Cxyn.jpg",
+      content: "Preciousssss, preciousss feets"
+    },
+    
+    {
+      title: "Banana fail",
+      url: "http://imgur.com/f64r09Q",
+      content: "Gravity got to them in the end"
+    },
+    
+    {
+      title: "All hail hypnocat",
+      url: "http://imgur.com/qvvcITg",
+      content: "He is our new overlord"
+    }
+  ],
+  
+  mildlyinteresting: [
+    {
+      title: "Made a tiny sword from a nail",
+      url: "http://i.imgur.com/3JLzS2e.jpg",
+      content: "Cool!"
+    },
+    
+    {
+      title: "Look at these costumes",
+      url: "http://i.imgur.com/71GeugS.jpg",
+      content: "They are from a movie"
+    },
+    
+    {
+      title: "This corn has a penis",
+      url: "http://i.imgur.com/karxoPj.jpg",
+      content: "It's a-maize-ing"
+    },
+    
+    {
+      title: "Grass growing through an aloe plant",
+      url: "http://i.imgur.com/n82DHgU.jpg",
+      content: "That's some sharp, firm grass"
+    },
+    
+    {
+      title: "Vertically layered cake",
+      url: "http://i.imgur.com/EIqquUy.jpg",
+      content: "Cool."
+    },
+    
+    {
+      title: "Dropped pasta, art ensued",
+      url: "http://imgur.com/1UqDAOD",
+      content: "Watch out, Picasso"
+    }
+  ],
+  
+  food: [
+    {
+      title: "BACON",
+      url: "http://imgur.com/cm5IrH2",
+      content: "Wrapping some other thing that isn't bacon"
+    },
+    
+    {
+      title: "Fancy cooking",
+      url: "http://i.imgur.com/BQsyhJu.jpg",
+      content: "The rainy outdoor BBQ is all the rage"
+    },
+    
+    {
+      title: "Pizza!",
+      url: "http://i.imgur.com/Ch4pdwM.jpg",
+      content: "When it's on a bagel, you can have pizza any time"
+    },
+    
+    {
+      title: "This looks amazing",
+      url: "http://imgur.com/vvr2fpj",
+      content: "I am eating it with my mind"
+    },
+    
+    {
+      title: "Deep dish cast iron skillet pizza",
+      url: "http://imgur.com/eV8qc8d",
+      content: "Dig in!"
+    },
+    
+    {
+      title: "Raspberry muffins",
+      url: "http://i.imgur.com/6DnWazj.jpg",
+      content: "Carefully baked one at a time to perfection, like app features"
+    }
+  ]
+}
+
+#create posts from image_hashes
+Sub.all.each do |sub|
+  id = sub.id
+  title = sub.title[2..-1].to_sym
+  image_hashes[title].each do |hash|
+    hash[:sub_id] = id
+    hash[:submitter_id] = User.all.sample.id
+    Post.create!(hash)
+  end
 end
 
 #vote on all posts
@@ -58,18 +394,46 @@ Post.all.each do |post|
     
     r = rand(10)
     
-    if r < 5
+    if r <= 5
       r.times do
+        r2 = rand(10)
+        content = (r2 < 4) ? Faker::Hacker.verb : Faker::Hacker.say_something_smart
+        
         c = Comment.create!(
-        content: Faker::Hacker.verb,
+        content: content,
         submitter_id: User.all.sample.id,
         post_id: post.id,
         parent_comment_id: c.id
         )
+        
+        if (r2 < 3)
+          c2 = c
+          r2.times do 
+            c2 = Comment.create!(
+            content: Faker::Hacker.noun,
+            submitter_id: User.all.sample.id,
+            post_id: post.id,
+            parent_comment_id: c2.id
+            )
+          end
+        end
       end
     end
   end
 end
 
-#create a large comment structure on one post
-# post = Post.all.sample
+#vote on comments
+User.all.each do |user|
+  Comment.all.each do |comment|
+    r = rand(10)
+    next if r < 5
+    v = (r < 8) ? "up" : "down"
+
+    Vote.create!(
+    user_id: user.id,
+    voteable_id: comment.id,
+    voteable_type: "Comment",
+    vote_type: v
+    )
+  end
+end

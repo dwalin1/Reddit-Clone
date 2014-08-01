@@ -1,28 +1,16 @@
-== README
+<h1>Raddit.co</h1>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Reddit clone I built in Backbone and Rails as my final solo project for App Academy in July 2014. I record my day to day progress on the app in my App Academy blog, starting here: <a href=""></a>.
 
-Things you may want to cover:
+<h3>Functionality</h3>
+Mostly it works just like actual Reddit for those features of actual Reddit it supports: without logging in, users can view the top (most upvoted) posts from all subs in descending order on the front page, as well as click on the links and read the comments. To create a sub, post, or comment/reply, as well as to upvote or downvote, the user needs to log in. I have full auth with hashed passwords and session tokens, but for a demo the user can just claim to be Batman, in which case a new user of the with a username of the form "Batman123" is created for their session.
 
-* Ruby version
+Raddit features infinite scroll for posts, loading ten at a time when the user reaches the bottom of the page until all have been loaded. Replies in the comments can nest indefinitely, though they will eventually reach the far right of the screen and become too narrow to be legible. If the URL entered for a post links to imgur, the corresponding .jpg or .gif is displayed on Raddit as a medium thumbnail, and the full version is linked to, as on Reddit. User and sub show pages both collect only the relevant posts in descending order of upvotes.
 
-* System dependencies
+<h3>Implementation</h3>
+The backend is Rails and jbuilder with Postgres. I use column caches for things like keeping count of upvotes and comments, so that I don't need to count records in the database every time. For the comments I could simply use Rails' built in <code>counter_cache</code> option, but the upvotes required me to write a custom solution, since I want the upvotes counter for a post or comment to increment when a vote with type "up" is created, decrement when a vote of type "down" is created, and increment <i>twice</i> when a vote's type is changed from down to up. I paginate Rails responses with Kaminari and then implement the infinite scroll in Javascript on the front end.
 
-* Configuration
+The frontend is a single-page app in Backbone which communicates with the server by sending JSON back and forth with AJAX. Infinite scroll and voting mechanisms are added to specific views with mixins I wrote to keep the code DRY. I rely on a custom Backbone.CompositeView class, which extends Backbone.View, for nested subviews. There is a basic post view which recurs on the front page, the subs page, and the post view page. Each individual comment on the post show page is also a subview of its parent comment, which may in turn be a subview of <i>its</i> parent comment, all the way up the tree to the top level comment, which is a reply to the post rather than a reply to a comment. Visually, I rely on a combination of HTML5, Bootstrap, and my own custom CSS. 
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+<h3>Future Improvements</h3>
+Given more time for the project, first priority would probably be adding infinite scroll to the comments. This is more involved than adding it for posts, since the comments are deeply nested, and I would also have to create a solution so that at a certain level of nesting they link to a new view instead of cramming against the side of the window. It would require a fairly major refactor of the existing project as well, but I know it would be a good exercise.
