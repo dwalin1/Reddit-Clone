@@ -55,8 +55,34 @@ span.activeVote.upvote {
 	color: #36B41C;
 }
 
+span.upvote {
+	transition: all .25s ease;
+}
+
+span.downvote {
+	transition: all .25s ease;
+}
+
+span.upvote:hover {
+	transform: rotate(.02turn);
+	color: #36B41C;
+}
+
+span.upvote.activeVote:hover {
+	transform: rotate(.5turn);
+}
+
+span.downvote:hover {
+	transform: rotate(-0.02turn);
+	color: #F01439;
+}
+
 span.activeVote.downvote {
 	color: #F01439;
+}
+
+span.activeVote.downvote:hover {
+	transform: rotate(.5turn);
 }
 
 div.bottomSpace {

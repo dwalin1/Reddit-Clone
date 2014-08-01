@@ -49,12 +49,12 @@
 	<div class="postRow2 row">
 		<div class="author cols-xs-12">
 <p>submitted <%= post.get("ago") %> ago by 
-	<a href="#users/<%= post.escape("submitter_id") %>">
+	<a href="#users/<%= post.escape("submitter_id") %>" class="big">
 		<%= post.escape("submitter") %>
 	</a>
 <% if (post.escape("sub")) { %>
 to 
-<a href="<%= post.get('sub_url') %>">
+<a href="<%= post.get('sub_url') %>" class="big">
 	<%= post.escape("sub") %>
 </a>
 <% } %>
