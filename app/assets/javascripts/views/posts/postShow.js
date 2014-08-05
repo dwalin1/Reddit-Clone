@@ -35,7 +35,6 @@ App.Views.postShow = Backbone.CompositeView.extend({
 	},
 	
 	addComment: function(comment) {
-		// comment.set({ post: this.model });
 		this.addSubview(this.commentEl, new App.Views.commentShow({
 			model: comment,
 			parent: this

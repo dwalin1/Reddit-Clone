@@ -28,7 +28,7 @@ subs.each_with_index do |sub, i|
   )
 end
 
-
+#create giant hash to iterate over for posts
 image_hashes = {
   gifs: [
     {

@@ -10,18 +10,8 @@ App.Models.Comment = Backbone.Model.extend({
 		return this._comments;
 	},
 
-	// parse: function(response) {
-	// 	if (response.comments) {
-	// 		this.comments().set(response.comments, { parse: true });
-	// 		delete response.comments;
-	// 	}
-	//
-	// 	return response
-	// },
-	
 	initialize: function(options) {
 		if (options.post) {
-			// throw "Post must given to comment model on initialize";
 			this.post = options.post;
 		}		
 	}

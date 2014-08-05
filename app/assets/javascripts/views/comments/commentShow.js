@@ -6,9 +6,7 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 	form: false,
 	
 	tagName: "li",
-	
-	// className: "container container-fluid",
-		
+			
 	initialize: function(options) {
 		this.parent = options.parent;
 		this.showingReplyForm = false;	
@@ -42,7 +40,6 @@ App.Views.commentShow = Backbone.CompositeView.extend({
 		});
 		this.$el.html(renderedContent);	
 		this.attachSubviews();	
-		// console.log("Subviews: " + this.subviews(this.commentEl).length);
 		return this;
 	},
 	

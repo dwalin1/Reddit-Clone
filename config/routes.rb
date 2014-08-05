@@ -17,7 +17,6 @@ Rails.application.routes.draw do
     resources :votes, only: [:create, :destroy, :update]
     
     resources :users, only: [:show]
-    # get "nested_comments/:parent_id/", to: "comments#comment_index"
   end
   
   get "im_batman", to: "sessions#im_batman"

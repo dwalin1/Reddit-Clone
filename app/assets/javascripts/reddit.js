@@ -5,7 +5,6 @@ window.App = {
 	Views: {},
 	
 	initialize: function() {
-		//add mixins to my classes
 		_.extend(App.Views.basePostShow.prototype, voteMixIn);
 		_.extend(App.Views.commentShow.prototype, voteMixIn);
 		
